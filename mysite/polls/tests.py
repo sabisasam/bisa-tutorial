@@ -150,3 +150,43 @@ class QuestionResultsViewTests(TestCase):
 		url = reverse('polls:results', args=(past_question.id,))
 		response = self.client.get(url)
 		self.assertContains(response, past_question.question_text)
+
+
+class QuestionRandom1ViewTests(TestCase):
+
+	def test_result_is_not_NULL(self):
+		"""
+		The result is not NULL.
+		"""
+		question = create_question(question_text='A question.', days=-5)
+		response = self.client.get(reverse('polls:random-queryset'))
+		self.assertIsNotNone(response.context['random_question'])
+	
+	def test_result_is_question_object(self):
+		"""
+		The result is a question object.
+		"""
+		question = create_question(question_text='A question.', days=-5)
+		response = self.client.get(reverse('polls:random-queryset'))
+		queryset = response.context['random_question']
+		self.assertIs(type(queryset), Question)
+
+
+class QuestionRandomViewTests(TestCase):
+
+	def test_result_is_not_NULL(self):
+		"""
+		The result is not NULL.
+		"""
+		question = create_question(question_text='A question.', days=-5)
+		response = self.client.get(reverse('polls:random-number'))
+		self.assertIsNotNone(response.context['random_question'])
+	
+	def test_result_is_question_object(self):
+		"""
+		The result is a question object.
+		"""
+		question = create_question(question_text='A question.', days=-5)
+		response = self.client.get(reverse('polls:random-number'))
+		queryset = response.context['random_question']
+		self.assertIs(type(queryset), Question)
