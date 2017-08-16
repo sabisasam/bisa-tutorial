@@ -154,39 +154,53 @@ class QuestionResultsViewTests(TestCase):
 
 class QuestionRandom1ViewTests(TestCase):
 
-	def test_result_is_not_NULL(self):
+	def test_no_questions(self):
 		"""
-		The result is not NULL.
+		If no questions exist, an appropriate message is displayed.
+		"""
+		response = self.client.get(reverse('polls:random-queryset'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_future_question(self):
+		"""
+		If no published questions exist, an appropriate message is displayed.
+		"""
+		future_question = create_question(question_text='Future question.', days=5)
+		response = self.client.get(reverse('polls:random-queryset'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_past_question(self):
+		"""
+		The result is a question object and not NULL if published questions exist.
 		"""
 		question = create_question(question_text='A question.', days=-5)
 		response = self.client.get(reverse('polls:random-queryset'))
 		self.assertIsNotNone(response.context['random_question'])
-	
-	def test_result_is_question_object(self):
-		"""
-		The result is a question object.
-		"""
-		question = create_question(question_text='A question.', days=-5)
-		response = self.client.get(reverse('polls:random-queryset'))
-		queryset = response.context['random_question']
-		self.assertIs(type(queryset), Question)
+		self.assertIs(type(response.context['random_question']), Question)
 
 
 class QuestionRandomViewTests(TestCase):
 
-	def test_result_is_not_NULL(self):
+	def test_no_questions(self):
 		"""
-		The result is not NULL.
+		If no questions exist, an appropriate message is displayed.
+		"""
+		response = self.client.get(reverse('polls:random-number'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_future_question(self):
+		"""
+		If no published questions exist, an appropriate message is displayed.
+		"""
+		future_question = create_question(question_text='Future question.', days=5)
+		response = self.client.get(reverse('polls:random-number'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_past_question(self):
+		"""
+		The result is a question object and not NULL if published questions exist.
 		"""
 		question = create_question(question_text='A question.', days=-5)
 		response = self.client.get(reverse('polls:random-number'))
 		self.assertIsNotNone(response.context['random_question'])
-	
-	def test_result_is_question_object(self):
-		"""
-		The result is a question object.
-		"""
-		question = create_question(question_text='A question.', days=-5)
-		response = self.client.get(reverse('polls:random-number'))
-		queryset = response.context['random_question']
-		self.assertIs(type(queryset), Question)
+		self.assertIs(type(response.context['random_question']), Question)
