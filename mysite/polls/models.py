@@ -20,6 +20,12 @@ class Question(models.Model):
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
 
+    class Meta:
+        permissions = (
+            ("view_published_question", "Can view published questions"),
+            ("view_unpublished_question", "Can view unpublished questions"),
+        )
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -28,6 +34,11 @@ class Choice(models.Model):
     
     def __str__(self):
         return self.choice_text
+
+    class Meta:
+        permissions = (
+            ("vote_choice", "Can vote for a choice"),
+        )
 
 
 class QuestionHistory(models.Model):
@@ -45,3 +56,8 @@ class QuestionHistory(models.Model):
                 question=instance,
                 defaults={'creation_time': timezone.now()},
             )
+
+    class Meta:
+        permissions = (
+            ("view_question_history", "Can view question history"),
+        )
