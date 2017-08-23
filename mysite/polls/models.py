@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
+from django_extensions.db.models import TimeStampedModel
 
 # imports for function add_permissions
 from django.db.models.signals import post_migrate
@@ -11,7 +12,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
 
 
-class Question(models.Model):
+class Question(TimeStampedModel):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     
@@ -53,7 +54,7 @@ class QuestionHistory(models.Model):
         if created:
             obj, obj_created = QuestionHistory.objects.get_or_create(
                 question=instance,
-                defaults={'creation_time': timezone.now()},
+                defaults={'creation_time': instance.created},
             )
 
 
