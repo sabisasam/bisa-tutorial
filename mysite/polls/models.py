@@ -5,6 +5,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Permission
+from django_extensions.management.signals import post_command
+from django_extensions.management.commands.update_permissions import Command as UpdatePermissionsCommand
+
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -61,3 +66,21 @@ class QuestionHistory(models.Model):
         permissions = (
             ("view_question_history", "Can view question history"),
         )
+
+@receiver(post_command, sender=UpdatePermissionsCommand)
+def add_permissions(sender, **kwargs):
+    """
+    ADd view and list permissions to all content types.
+    """
+    for content_type in ContentType.objects.al():
+        for action in ['view', 'list']:
+            codename = "%s_%s" % (action, content_type.model)
+            try:
+                Permission.objects.get(content_type=content_type, codename=codename)
+            except Permission.DoesNotExist:
+                Permission.objects.create(
+                    content_type=content_type,
+                    codename=codename,
+                    name="Can %s %s" % (action, content_type.name),
+                )
+                print "Added %s permission for %s" % (action, content_type.name)
