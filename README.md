@@ -1,6 +1,8 @@
 # django-tutorial
 
-## Signals and permissions
+## Django Packages
 
-Changed custom permissions.
-Added function add_permissions which automatically adds view and list permissions for every content type after migration if they don't exist already.
+Added django-extensions to installed apps.
+Changed Question model to be a TimeStampedModel
+and adjusted save_question_creation_time function in the QuestionHistory model
+so now it uses the created attribute of Question model.
