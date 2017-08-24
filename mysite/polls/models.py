@@ -25,12 +25,6 @@ class Question(models.Model):
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
 
-    class Meta:
-        permissions = (
-            ("view_published_question", "Can view published questions"),
-            ("view_unpublished_question", "Can view unpublished questions"),
-        )
-
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -62,17 +56,13 @@ class QuestionHistory(models.Model):
                 defaults={'creation_time': timezone.now()},
             )
 
-    class Meta:
-        permissions = (
-            ("view_question_history", "Can view question history"),
-        )
 
 @receiver(post_command, sender=UpdatePermissionsCommand)
 def add_permissions(sender, **kwargs):
     """
-    ADd view and list permissions to all content types.
+    Add view and list permissions to all content types.
     """
-    for content_type in ContentType.objects.al():
+    for content_type in ContentType.objects.all():
         for action in ['view', 'list']:
             codename = "%s_%s" % (action, content_type.model)
             try:
@@ -83,4 +73,4 @@ def add_permissions(sender, **kwargs):
                     codename=codename,
                     name="Can %s %s" % (action, content_type.name),
                 )
-                print "Added %s permission for %s" % (action, content_type.name)
+                print("Added %s permission for %s" % (action, content_type.name))
