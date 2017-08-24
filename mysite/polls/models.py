@@ -5,10 +5,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+# imports for function add_permissions
+from django.db.models.signals import post_migrate
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
-from django_extensions.management.signals import post_command
-from django_extensions.management.commands.update_permissions import Command as UpdatePermissionsCommand
 
 
 class Question(models.Model):
@@ -57,7 +57,7 @@ class QuestionHistory(models.Model):
             )
 
 
-@receiver(post_command, sender=UpdatePermissionsCommand)
+@receiver(post_migrate)
 def add_permissions(sender, **kwargs):
     """
     Add view and list permissions to all content types.
