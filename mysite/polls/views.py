@@ -1,5 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
@@ -89,3 +90,21 @@ class RandomView(generic.ListView):
 		number_of_objects = published_questions.count()
 		if number_of_objects > 0:
 			return published_questions[randint(0, number_of_objects - 1)]
+
+
+def questions(request):
+	all_questions = Question.objects.all()
+	# show 1 question per page
+	paginator = Paginator(all_questions, 1)
+
+	page = request.GET.get('page')
+	try:
+		question = paginator.page(page)
+	except PageNotAnInteger:
+		# if page is not an integer, deliver first page
+		question = paginator.page(1)
+	except EmptyPage:
+		# if page is out of range, deliver last page of results
+		question = paginator.page(paginator.num_pages)
+
+	return render(request, 'questions.html', {'question': question})
