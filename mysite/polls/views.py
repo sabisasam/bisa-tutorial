@@ -107,4 +107,4 @@ def questions(request):
 		# if page is out of range, deliver last page of results
 		question = paginator.page(paginator.num_pages)
 
-	return render(request, 'questions.html', {'question': question})
+	return render(request, 'polls/questions.html', {'question': question})
