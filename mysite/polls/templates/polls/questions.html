@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/questions.css' %}" />
+
 {% for q in question %}
 	{{ q.question_text|upper }}<br />
 	<br />
@@ -10,7 +14,7 @@
 <div class="pagination">
 	<span class="step-links">
 		{% if question.has_previous %}
-			<a href="?page={{ question.previous_page_number }}">previous</a>
+			<div class="round-button"><div class="round-button-circle"><a href="?page={{ question.previous_page_number }}" class="round-button">previous</a></div></div>
 		{% endif %}
 
 		<span class="current">
@@ -18,7 +22,7 @@
 		</span>
 
 		{% if question.has_next %}
-			<a href="?page={{ question.next_page_number }}">next</a>
+			<div class="round-button"><div class="round-button-circle"><a href="?page={{ question.next_page_number }}" class="round-button">next</a></div></div>
 		{% endif %}
 	</span>
 </div>
