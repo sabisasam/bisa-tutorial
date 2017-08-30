@@ -1,5 +1,6 @@
 .round-button {
-	width: 70px;
+	width: 35px;
+	position: relative;
 }
 .round-button-circle {
 	width: 100%;
@@ -12,14 +13,11 @@
 	background: #587884;
 }
 .round-button a {
-	float: left;
-	padding-top: 50%;
-    padding-bottom: 50%;
-	line-height: 0.1;
 	text-align: center;
 	color: white;
     font-family: Arial;
-    font-size: 12px;
-    font-weight: bold;
-    text-decoration: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
