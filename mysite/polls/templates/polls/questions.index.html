@@ -1,0 +1,17 @@
+<h2>Which question would you like to see?</h2>
+
+<br />
+
+<form action="/polls/questions/?page={{ page }}">
+	Please enter question number:<br />
+	<input type="text" name=page placeholder="between 1 and {{ num_questions }}" />
+	<input type="submit" value="submit">
+</form>
+
+<br />
+
+<input type=button onClick="location.href='/polls/questions/?page=1'" value='Oldest question'>
+
+<br /><br />
+
+<input type=button onClick="location.href='/polls/questions/?page={{ num_questions }}'" value='Latest question'>

@@ -18,4 +18,6 @@ urlpatterns = [
     url(r'^random/$', views.RandomView.as_view(), name='random-number'),
     # ex: /polls/questions/
     url(r'^questions/$', views.questions, name='questions'),
+    # ex: /polls/questions/index/
+    url(r'^questions/index/$', views.questionsIndex, name='questions-index'),
 ]

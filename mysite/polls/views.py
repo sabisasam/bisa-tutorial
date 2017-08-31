@@ -93,9 +93,9 @@ class RandomView(generic.ListView):
 
 
 def questions(request):
-	all_questions = Question.objects.all()
+	question_list = Question.objects.filter(archived=False).order_by('pub_date')
 	# show 1 question per page
-	paginator = Paginator(all_questions, 1)
+	paginator = Paginator(question_list, 1)
 
 	page = request.GET.get('page')
 	try:
@@ -108,3 +108,10 @@ def questions(request):
 		question = paginator.page(paginator.num_pages)
 
 	return render(request, 'polls/questions.html', {'question': question})
+
+
+def questionsIndex(request):
+	question_list = Question.objects.filter(archived=False).order_by('pub_date')
+	num_questions = question_list.count()
+
+	return render(request, 'polls/questions.index.html', {'num_questions': num_questions})
