@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^questions/$', views.questions, name='questions'),
     # ex: /polls/questions/index/
     url(r'^questions/index/$', views.questionsIndex, name='questions-index'),
+    # ex: /polls/questions/?page=5/archived/
+    url(r'^questions/(?P<page_num>[0-9]+)/archived/$', views.questionsArchive, name='questions-archive'),
 ]

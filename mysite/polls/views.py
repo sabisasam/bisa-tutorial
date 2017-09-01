@@ -103,15 +103,43 @@ def questions(request):
 	except PageNotAnInteger:
 		# if page is not an integer, deliver first page
 		question = paginator.page(1)
+		page = 1
 	except EmptyPage:
 		# if page is out of range, deliver last page of results
 		question = paginator.page(paginator.num_pages)
+		page = paginator.num_pages
 
-	return render(request, 'polls/questions.html', {'question': question})
+	return render(request, 'polls/questions.html', {
+		'question': question,
+		'page': page,
+	})
 
 
 def questionsIndex(request):
 	question_list = Question.objects.filter(archived=False).order_by('pub_date')
 	num_questions = question_list.count()
 
-	return render(request, 'polls/questions.index.html', {'num_questions': num_questions})
+	return render(request, 'polls/questions.index.html', {
+		'num_questions': num_questions,
+	})
+
+
+def questionsArchive(request, page_num):
+	question_list = Question.objects.filter(archived=False).order_by('pub_date')
+	num_questions = question_list.count()
+	try:
+		question = question_list[int(page_num) - 1]
+	except IndexError:
+		return render(request, 'polls/questions.archived.html', {
+			'page_num': page_num,
+			'error_message': "An error has occurred. The question could not be archived.",
+		})
+	else:
+		question_text = question.question_text
+		question.archived = True
+		question.save()
+		num_questions -= 1
+		return render(request, 'polls/questions.archived.html', {
+			'question_text': question_text,
+			'num_questions': num_questions,
+		})

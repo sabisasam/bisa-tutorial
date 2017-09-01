@@ -1,0 +1,7 @@
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+	<a href="/polls/questions/?page={{ page_num }}">Go back to question.</a>
+{% else %}
+	<h1>The question "{{ question_text }}" is now archived.</h1>
+	{% include "polls/questions.index.html" with num_questions=num_questions %}
+{% endif %}
