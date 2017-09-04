@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -130,16 +131,12 @@ def questionsArchive(request, page_num):
 	try:
 		question = question_list[int(page_num) - 1]
 	except IndexError:
-		return render(request, 'polls/questions.archived.html', {
-			'page_num': page_num,
-			'error_message': "An error has occurred. The question could not be archived.",
-		})
+                messages.error(request, 'An error has occurred. The question could not be archived.')
+                return HttpResponseRedirect(reverse('polls:questions-index'))
 	else:
 		question_text = question.question_text
 		question.archived = True
 		question.save()
 		num_questions -= 1
-		return render(request, 'polls/questions.archived.html', {
-			'question_text': question_text,
-			'num_questions': num_questions,
-		})
+		messages.success(request, 'The question "' + question_text + '" is now archived.')
+		return HttpResponseRedirect(reverse('polls:questions-index'))
