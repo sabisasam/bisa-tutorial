@@ -15,6 +15,7 @@ from django.contrib.auth.models import Permission
 class Question(TimeStampedModel):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
+    archived = models.BooleanField(default=False)
     
     def __str__(self):
         return self.question_text
