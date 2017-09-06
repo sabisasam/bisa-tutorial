@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from random import randint
+
 from .models import Choice, Question
 
 
@@ -60,3 +62,30 @@ def vote(request, question_id):
 		# with POST data prevents data from being postet twice if a
 		# user hits the Back button.
 		return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+class Random1View(generic.ListView):
+	template_name = 'polls/random.html'
+	context_object_name = 'random_question'
+
+	def get_queryset(self):
+		"""
+		Returns a random question, selected through using
+		queryset (random order).
+		"""
+		return Question.objects.filter(pub_date__lte=timezone.now()).order_by('?').first()
+
+
+class RandomView(generic.ListView):
+	template_name = 'polls/random.html'
+	context_object_name = 'random_question'
+
+	def get_queryset(self):
+		"""
+		Returns a random question, selected through using
+		a random number.
+		"""
+		published_questions = Question.objects.filter(pub_date__lte=timezone.now())
+		number_of_objects = published_questions.count()
+		if number_of_objects > 0:
+			return published_questions[randint(0, number_of_objects - 1)]

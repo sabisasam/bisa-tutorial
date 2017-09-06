@@ -150,3 +150,57 @@ class QuestionResultsViewTests(TestCase):
 		url = reverse('polls:results', args=(past_question.id,))
 		response = self.client.get(url)
 		self.assertContains(response, past_question.question_text)
+
+
+class QuestionRandom1ViewTests(TestCase):
+
+	def test_no_questions(self):
+		"""
+		If no questions exist, an appropriate message is displayed.
+		"""
+		response = self.client.get(reverse('polls:random-queryset'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_future_question(self):
+		"""
+		If no published questions exist, an appropriate message is displayed.
+		"""
+		future_question = create_question(question_text='Future question.', days=5)
+		response = self.client.get(reverse('polls:random-queryset'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_past_question(self):
+		"""
+		The result is a question object and not NULL if published questions exist.
+		"""
+		question = create_question(question_text='A question.', days=-5)
+		response = self.client.get(reverse('polls:random-queryset'))
+		self.assertIsNotNone(response.context['random_question'])
+		self.assertIs(type(response.context['random_question']), Question)
+
+
+class QuestionRandomViewTests(TestCase):
+
+	def test_no_questions(self):
+		"""
+		If no questions exist, an appropriate message is displayed.
+		"""
+		response = self.client.get(reverse('polls:random-number'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_future_question(self):
+		"""
+		If no published questions exist, an appropriate message is displayed.
+		"""
+		future_question = create_question(question_text='Future question.', days=5)
+		response = self.client.get(reverse('polls:random-number'))
+		self.assertContains(response, "No published question available.")
+	
+	def test_past_question(self):
+		"""
+		The result is a question object and not NULL if published questions exist.
+		"""
+		question = create_question(question_text='A question.', days=-5)
+		response = self.client.get(reverse('polls:random-number'))
+		self.assertIsNotNone(response.context['random_question'])
+		self.assertIs(type(response.context['random_question']), Question)
