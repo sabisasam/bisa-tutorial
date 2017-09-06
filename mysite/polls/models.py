@@ -5,6 +5,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+# imports for function add_permissions
+from django.db.models.signals import post_migrate
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Permission
+
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -19,12 +24,6 @@ class Question(models.Model):
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
-
-    class Meta:
-        permissions = (
-            ("view_published_question", "Can view published questions"),
-            ("view_unpublished_question", "Can view unpublished questions"),
-        )
 
 
 class Choice(models.Model):
@@ -57,7 +56,21 @@ class QuestionHistory(models.Model):
                 defaults={'creation_time': timezone.now()},
             )
 
-    class Meta:
-        permissions = (
-            ("view_question_history", "Can view question history"),
-        )
+
+@receiver(post_migrate)
+def add_permissions(sender, **kwargs):
+    """
+    Add view and list permissions to all content types.
+    """
+    for content_type in ContentType.objects.all():
+        for action in ['view', 'list']:
+            codename = "%s_%s" % (action, content_type.model)
+            try:
+                Permission.objects.get(content_type=content_type, codename=codename)
+            except Permission.DoesNotExist:
+                Permission.objects.create(
+                    content_type=content_type,
+                    codename=codename,
+                    name="Can %s %s" % (action, content_type.name),
+                )
+                print("Added %s permission for %s" % (action, content_type.name))

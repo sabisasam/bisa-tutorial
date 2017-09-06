@@ -1,5 +1,10 @@
 # django-tutorial
 
+## Signals and permissions for all classes at the same time
+
+Changed custom permissions.
+Added function add_permissions which automatically adds view and list permissions for every content type after migration if they don't exist already.
+
 ## Custom Permissions
 
 Custom permissions got added.
