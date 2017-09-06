@@ -1,6 +1,8 @@
 import datetime
 
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 
 
@@ -26,3 +28,20 @@ class Choice(models.Model):
     
     def __str__(self):
         return self.choice_text
+
+
+class QuestionHistory(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.SET_NULL, blank=True, null=True)
+    creation_time = models.DateTimeField('date created')
+
+    def __str__(self):
+        time = self.creation_time.strftime('%b. %d, %Y, %X')
+        return time
+
+    @receiver(post_save, sender=Question)
+    def save_question_creation_time(sender, instance, created, **kwargs):
+        if created:
+            obj, obj_created = QuestionHistory.objects.get_or_create(
+                question=instance,
+                defaults={'creation_time': timezone.now()},
+            )
