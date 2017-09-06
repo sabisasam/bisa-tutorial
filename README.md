@@ -1,10 +1,18 @@
 # django-tutorial
 
-## Signal Handling
+## Custom Permissions
 
+Custom permissions got added.
+
+In class Question, the permissions to view published questions and to view unpublished questions were introduced.
+
+In class Choice, the permission to vote for a choice were added.
+
+And in class QuestionHistory, it's the permission to view the question history.
 A model named QuestionHistory with question and creation_time as its attributes got added.
 
 If a question is added to the database, an instance of QuestionHistory gets created.
+
 The attribute creation_time will be set to the datetime at that moment and question is simply the question it relates to.
 The question attribute will be set to null if the question object gets deleted.
 
