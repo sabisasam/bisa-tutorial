@@ -1,5 +1,14 @@
 # django-tutorial
 
+## Tutorial part 7
+
+The admin form was edited:
+
+The edit form for questions got restructured and the possibility to set choices was added.
+The admin change list now shows more information about the questions.
+Also a filter sidebar to filter by date published and a search box to search for questions were added.
+Finally, the admin site name got changed to "Polls Administration".
+
 ## Tutorial part 6
 
 At the index page, the color of question links was set to green and a background image was added.
@@ -55,4 +64,6 @@ At least an user who can login to the admin site got created and the polls app g
 
 The project mysite was set up and the polls app got created.
 The polls app got a simple index view with the message:
+
     "Hello, world. You're at the polls index."
+
