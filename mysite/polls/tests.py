@@ -8,6 +8,9 @@ from .models import Question
 
 
 class QuestionModelTests(TestCase):
+	"""
+	Contains tests for Question model.
+	"""
 
 	def test_was_published_recently_with_future_question(self):
 		"""
@@ -48,6 +51,9 @@ def create_question(question_text, days):
 
 
 class QuestionIndexViewTests(TestCase):
+	"""
+	Contains tests for IndexView view.
+	"""
 
 	def test_no_questions(self):
 		"""
@@ -107,6 +113,9 @@ class QuestionIndexViewTests(TestCase):
 
 
 class QuestionDetailViewTests(TestCase):
+	"""
+	Contains tests for DetailView view.
+	"""
 
 	def test_future_question(self):
 		"""
@@ -130,6 +139,9 @@ class QuestionDetailViewTests(TestCase):
 
 
 class QuestionResultsViewTests(TestCase):
+	"""
+	Contains tests for ResultsView view.
+	"""
 
 	def test_future_question(self):
 		"""
@@ -153,6 +165,9 @@ class QuestionResultsViewTests(TestCase):
 
 
 class QuestionRandom1ViewTests(TestCase):
+	"""
+	Contains tests for Random1View view.
+	"""
 
 	def test_no_questions(self):
 		"""
@@ -180,6 +195,9 @@ class QuestionRandom1ViewTests(TestCase):
 
 
 class QuestionRandomViewTests(TestCase):
+	"""
+	Contains tests for RandomView view.
+	"""
 
 	def test_no_questions(self):
 		"""

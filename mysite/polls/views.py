@@ -12,6 +12,10 @@ from .models import Choice, Question
 
 
 class IndexView(generic.ListView):
+	"""
+	This view belongs to the index page which lists links to the last five
+	published questions and shows a background image.
+	"""
 	template_name = 'polls/index.html'
 	context_object_name = 'latest_question_list'
 
@@ -26,6 +30,10 @@ class IndexView(generic.ListView):
 
 
 class DetailView(generic.DetailView):
+	"""
+	This view belongs to the detail page which shows the question text of a
+	question and its choices. It is possible to choose and vote for a choice.
+	"""
 	model = Question
 	template_name = 'polls/detail.html'
 
@@ -37,6 +45,10 @@ class DetailView(generic.DetailView):
 
 
 class ResultsView(generic.DetailView):
+	"""
+	This view belongs to the results page which displays the question text of a
+	question and its choices with their number of votes.
+	"""
 	model = Question
 	template_name = 'polls/results.html'
 
@@ -48,6 +60,11 @@ class ResultsView(generic.DetailView):
 
 
 def vote(request, question_id):
+	"""
+	Checks if a choice is selected when clicking vote button. If yes,
+	the function adds 1 to the vote counter of the choice. If no, it
+	returns an error message.
+	"""
 	question = get_object_or_404(Question, pk=question_id)
 	try:
 		selected_choice = question.choice_set.get(pk=request.POST['choice'])
@@ -67,6 +84,10 @@ def vote(request, question_id):
 
 
 class Random1View(generic.ListView):
+	"""
+	This view belongs to the random1 page showing a random question which
+	is selected through using random order in queryset.
+	"""
 	template_name = 'polls/random.html'
 	context_object_name = 'random_question'
 
@@ -80,6 +101,10 @@ class Random1View(generic.ListView):
 
 
 class RandomView(generic.ListView):
+	"""
+	This view belongs to the random page showing a random question which
+	is selected through using a random number.
+	"""
 	template_name = 'polls/random.html'
 	context_object_name = 'random_question'
 
@@ -96,6 +121,10 @@ class RandomView(generic.ListView):
 
 
 def questions(request):
+	"""
+	Creates a page for every question object which is not archived
+	and makes it possible to navigate through those questions.
+	"""
 	question_list = Question.objects.filter(archived=False).order_by('pub_date')
 	# show 1 question per page
 	paginator = Paginator(question_list, 1)
@@ -119,6 +148,10 @@ def questions(request):
 
 
 def questionsIndex(request):
+	"""
+	Tells the questions index page, how many questions exist that
+	are not archived.
+	"""
 	question_list = Question.objects.filter(archived=False).order_by('pub_date')
 	num_questions = question_list.count()
 
@@ -128,6 +161,9 @@ def questionsIndex(request):
 
 
 def questionsArchive(request, page_num):
+	"""
+	Gets called through hitting archive button and archives a question.
+	"""
 	question_list = Question.objects.filter(archived=False).order_by('pub_date')
 	num_questions = question_list.count()
 	try:
