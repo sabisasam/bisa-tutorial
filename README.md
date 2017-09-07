@@ -14,7 +14,7 @@ They also test if the result is not NULL but a question object in case at least 
 Mockups in JPG and PDF format were added.
 A .gitignore file were created and modified.
 It tells which files should be ignored by Git.
-=======
+
 ## Tutorial part 7
 
 The admin form was edited:
