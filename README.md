@@ -8,6 +8,8 @@ If a question is added to the database, an instance of QuestionHistory gets crea
 The attribute creation_time will be set to the datetime at that moment and question is simply the question it relates to.
 The question attribute will be set to null if the question object gets deleted.
 
+## Tutorial part 8
+
 Random1 view and random view as well as random template were added.
 
 Both views return a random published question to display but they work different.
