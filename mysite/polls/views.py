@@ -75,7 +75,8 @@ class Random1View(generic.ListView):
 		Returns a random question, selected through using
 		queryset (random order).
 		"""
-		return Question.objects.filter(pub_date__lte=timezone.now()).order_by('?').first()
+		random_question = Question.objects.filter(pub_date__lte=timezone.now()).order_by('?').first()
+		return random_question
 
 
 class RandomView(generic.ListView):
@@ -90,7 +91,8 @@ class RandomView(generic.ListView):
 		published_questions = Question.objects.filter(pub_date__lte=timezone.now())
 		number_of_objects = published_questions.count()
 		if number_of_objects > 0:
-			return published_questions[randint(0, number_of_objects - 1)]
+			random_question = published_questions[randint(0, number_of_objects - 1)]
+			return random_question
 
 
 def questions(request):
