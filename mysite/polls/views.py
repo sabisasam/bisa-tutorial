@@ -1,5 +1,7 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
@@ -89,3 +91,52 @@ class RandomView(generic.ListView):
 		number_of_objects = published_questions.count()
 		if number_of_objects > 0:
 			return published_questions[randint(0, number_of_objects - 1)]
+
+
+def questions(request):
+	question_list = Question.objects.filter(archived=False).order_by('pub_date')
+	# show 1 question per page
+	paginator = Paginator(question_list, 1)
+
+	page = request.GET.get('page')
+	try:
+		question = paginator.page(page)
+	except PageNotAnInteger:
+		# if page is not an integer, deliver first page
+		question = paginator.page(1)
+		page = 1
+	except EmptyPage:
+		# if page is out of range, deliver last page of results
+		question = paginator.page(paginator.num_pages)
+		page = paginator.num_pages
+
+	return render(request, 'polls/questions.html', {
+		'question': question,
+		'page': page,
+	})
+
+
+def questionsIndex(request):
+	question_list = Question.objects.filter(archived=False).order_by('pub_date')
+	num_questions = question_list.count()
+
+	return render(request, 'polls/questions.index.html', {
+		'num_questions': num_questions,
+	})
+
+
+def questionsArchive(request, page_num):
+	question_list = Question.objects.filter(archived=False).order_by('pub_date')
+	num_questions = question_list.count()
+	try:
+		question = question_list[int(page_num) - 1]
+	except IndexError:
+                messages.error(request, 'An error has occurred. The question could not be archived.')
+                return HttpResponseRedirect(reverse('polls:questions-index'))
+	else:
+		question_text = question.question_text
+		question.archived = True
+		question.save()
+		num_questions -= 1
+		messages.success(request, 'The question "' + question_text + '" is now archived.')
+		return HttpResponseRedirect(reverse('polls:questions-index'))
