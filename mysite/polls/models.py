@@ -5,6 +5,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+# imports for function add_permissions
+from django.db.models.signals import post_migrate
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Permission
+
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -29,6 +34,11 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
+    class Meta:
+        permissions = (
+            ("vote_choice", "Can vote for a choice"),
+        )
+
 
 class QuestionHistory(models.Model):
     question = models.ForeignKey(Question, on_delete=models.SET_NULL, blank=True, null=True)
@@ -45,3 +55,22 @@ class QuestionHistory(models.Model):
                 question=instance,
                 defaults={'creation_time': timezone.now()},
             )
+
+
+@receiver(post_migrate)
+def add_permissions(sender, **kwargs):
+    """
+    Add view and list permissions to all content types.
+    """
+    for content_type in ContentType.objects.all():
+        for action in ['view', 'list']:
+            codename = "%s_%s" % (action, content_type.model)
+            try:
+                Permission.objects.get(content_type=content_type, codename=codename)
+            except Permission.DoesNotExist:
+                Permission.objects.create(
+                    content_type=content_type,
+                    codename=codename,
+                    name="Can %s %s" % (action, content_type.name),
+                )
+                print("Added %s permission for %s" % (action, content_type.name))
