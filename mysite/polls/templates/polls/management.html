@@ -1,0 +1,24 @@
+{% extends "polls/base.html" %}
+
+{% block title %}Management Page{% endblock %}
+
+{% block content %}
+<h2>New questions:</h2>
+{% endblock %}
+
+{% block script %}
+<script>
+	var socket = new WebSocket("ws://" + window.location.host + "/management/");
+	socket.onopen = function open() {
+		console.log("Created WebSocket connection.");
+	}
+	socket.onmessage = function message(event) {
+		var data = JSON.parse(event.data);
+		var question = encodeURI(data['question']);
+		question.text(question_text);
+	}
+	if (socket.readyState == WebSocket.OPEN) {
+		socket.onopen();
+	}
+</script>
+{% endblock %}

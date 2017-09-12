@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
@@ -178,3 +180,10 @@ def questionsArchive(request, page_num):
 		num_questions -= 1
 		messages.success(request, 'The question "' + question_text + '" is now archived.')
 		return HttpResponseRedirect(reverse('polls:questions-index'))
+
+
+def management(request):
+	new_questions = Question.objects.filter(
+		created__gte=timezone.now()-datetime.timedelta(days=1)
+	).order_by('-created')
+	return render(request, 'polls/management.html', {'new_questions': new_questions})
