@@ -1,0 +1,15 @@
+<h1>Chat Index</h1>
+
+Put the following into the JavaScript console:<br />
+
+<pre><code>
+	socket = new WebSocket("ws://" + window.location.host + "/chat/");
+	socket.onmessage = function(e) {
+		alert(e.data);
+	}
+	socket.onopen = function() {
+		socket.send("hello world");
+	}
+	// Call onopen directly if socket is already open
+	if (socket.readyState == WebSocket.OPEN) socket.onopen();
+</code></pre>
