@@ -15,7 +15,6 @@ chat_websocket = [
 
 polls_websocket = [
 	route("websocket.connect", polls.ws_connect),
-	route("websocket.receive", polls.ws_receive),
 	route("websocket.disconnect", polls.ws_disconnect),
 ]
 

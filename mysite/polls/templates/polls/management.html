@@ -21,8 +21,11 @@
 	}
 	socket.onmessage = function message(event) {
 		var data = JSON.parse(event.data);
-		var question = encodeURI(data['question']);
+		var question_id = encodeURI(data['question_id']);
 		var question_text = encodeURI(data['question_text']);
+		var question = $('li').filter(function () {
+			return $(this).data('question_id') == question_id;
+		});
 		question.text(question_text);
 	}
 	if (socket.readyState == WebSocket.OPEN) {
