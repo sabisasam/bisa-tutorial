@@ -47,10 +47,6 @@ def update_management_page(sender, instance, created, **kwargs):
     text of the question, to the management group.
     """
     if created:
-        print("update_management_page")
         Group("management").send({
-            'text': json.dumps({
-                'question_id': instance.id,
-                'question_text': instance.question_text
-            })
+            'text': json.dumps({})
         })

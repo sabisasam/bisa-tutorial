@@ -1,32 +1,31 @@
 {% extends "polls/base.html" %}
+{% load static %}
 
 {% block title %}Management Page{% endblock %}
 
 {% block content %}
 <h3>New questions:</h3>
 <ul>
-	{% for question in new_questions %}
-		<li>
-			{{ question.question_text }}
-		</li>
-	{% endfor %}
+	<div id="updating-part">
+	{% include "polls/management.questions.html" with new_questions=new_questions %}
+	</div>
 </ul>
 {% endblock %}
 
 {% block script %}
+<script src="{% static '/polls/js/jquery-3.2.1.min.js' %}"></script>
 <script>
 	var socket = new WebSocket("ws://" + window.location.host + "/management/");
 	socket.onopen = function open() {
 		console.log("Created WebSocket connection.");
 	}
 	socket.onmessage = function message(event) {
-		var data = JSON.parse(event.data);
-		var question_id = encodeURI(data['question_id']);
-		var question_text = encodeURI(data['question_text']);
-		var question = $('li').filter(function () {
-			return $(this).data('question_id') == question_id;
+		$.ajax({
+			url: "{% url 'polls:management-update' %}",
+			success: function(data) {
+				$('#updating-part').html(data);
+			}
 		});
-		question.text(question_text);
 	}
 	if (socket.readyState == WebSocket.OPEN) {
 		socket.onopen();

@@ -182,8 +182,15 @@ def questionsArchive(request, page_num):
 		return HttpResponseRedirect(reverse('polls:questions-index'))
 
 
-def management(request):
+def management(request, update=False):
 	new_questions = Question.objects.filter(
 		created__gte=timezone.now()-datetime.timedelta(days=1)
 	).order_by('-created')
-	return render(request, 'polls/management.html', {'new_questions': new_questions})
+	if update:
+		return render(request, 'polls/management.questions.html', {'new_questions': new_questions})
+	else:
+		return render(request, 'polls/management.html', {'new_questions': new_questions})
+
+
+def management_update(request):
+	return management(request, True)

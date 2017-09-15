@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+
 app_name = 'polls'
 urlpatterns = [
     # ex: /polls/
@@ -24,4 +25,6 @@ urlpatterns = [
     url(r'^questions/(?P<page_num>[0-9]+)/archived/$', views.questionsArchive, name='questions-archive'),
     # ex: /polls/management/
     url(r'^management/$', views.management, name='management'),
+    # ex: /polls/management/update/
+    url(r'^management/update/$', views.management_update, name='management-update'),
 ]
