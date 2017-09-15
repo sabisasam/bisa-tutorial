@@ -75,25 +75,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
-# Channels
-
 # Redis URL
 REDIS_URL = "redis://localhost:6379/14"
+SESSION_REDIS_HOST = 'localhost'
+
+# Channels
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [('REDIS_URL', 6379)],
-        },
         "ROUTING": "mysite.routing.channel_routing",
+        "CONFIG": {
+            "hosts": [(REDIS_URL, 6379)],
+        },
     },
 }
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
