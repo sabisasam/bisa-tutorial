@@ -18,14 +18,17 @@ def add_permissions(sender, **kwargs):
         for action in ['view', 'list']:
             codename = "%s_%s" % (action, content_type.model)
             try:
-                Permission.objects.get(content_type=content_type, codename=codename)
+                Permission.objects.get(
+                    content_type=content_type, codename=codename)
             except Permission.DoesNotExist:
                 Permission.objects.create(
                     content_type=content_type,
                     codename=codename,
                     name="Can %s %s" % (action, content_type.name),
                 )
-                print("Added %s permission for %s" % (action, content_type.name))
+                print(
+                    "Added %s permission for %s" %
+                    (action, content_type.name))
 
 
 @receiver(post_save, sender=Question)

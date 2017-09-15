@@ -16,13 +16,13 @@ class Question(TimeStampedModel):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     archived = models.BooleanField(default=False)
-    
+
     def __str__(self):
         """
         Defines representation of a question object.
         """
         return self.question_text
-    
+
     def was_published_recently(self):
         """
         Tells if a question was published within the last 24 hours.
@@ -43,7 +43,7 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
-    
+
     def __str__(self):
         """
         Defines representation of a choice object.
@@ -66,7 +66,11 @@ class QuestionHistory(models.Model):
     it exists and will be NULL if the question gets deleted. The creation_time attribute
     contains the creation time of the question and the id field holds the primary key.
     """
-    question = models.ForeignKey(Question, on_delete=models.SET_NULL, blank=True, null=True)
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True)
     creation_time = models.DateTimeField('date created')
 
     def __str__(self):

@@ -5,4 +5,4 @@ class PollsConfig(AppConfig):
     name = 'polls'
 
     def ready(self):
-    	import polls.signals
+        import polls.signals
