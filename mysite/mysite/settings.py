@@ -78,12 +78,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Channels
 
-
+# Redis URL
+REDIS_URL = "redis://localhost:6379/14"
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 6379)],
+            "hosts": [('REDIS_URL', 6379)],
         },
         "ROUTING": "mysite.routing.channel_routing",
     },
