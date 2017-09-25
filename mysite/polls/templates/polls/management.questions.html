@@ -1,9 +1,0 @@
-{% if new_questions %}
-	{% for question in new_questions %}
-		<li>
-			{{ question.question_text }}
-		</li>
-	{% endfor %}
-{% else %}
-<p>No new question available.</p>
-{% endif %}

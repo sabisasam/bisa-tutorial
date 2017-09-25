@@ -195,17 +195,33 @@ def questionsArchive(request, page_num):
         return HttpResponseRedirect(reverse('polls:questions-index'))
 
 
-def management(request, update=False):
+def management(request):
+    """
+    Belongs to "Management Page - Overview" which lists links to different
+    versions of the Management Page.
+    """
+    return render(request, 'polls/management.html')
+
+
+def managementPage(request):
+    """
+    Deals with different Management Page versions and with updating of these.
+    """
+    path = request.path
+    if path == '/polls/management/binding/':
+        template = 'polls/management.binding.html'
+    elif path == '/polls/management/signals/':
+        template = 'polls/management.signals.html'
+    elif path == '/polls/management/update/':
+        template = 'polls/management.update.html'
+    else:
+        messages.error(
+            request,
+            'An error has occurred: request.path returns an incorrect path.')
+        return HttpResponseRedirect(reverse('polls:management-update'))
+
     new_questions = Question.objects.filter(
         created__gte=timezone.now() - datetime.timedelta(days=1)
     ).order_by('-created')
-    if update:
-        return render(request, 'polls/management.questions.html',
-                      {'new_questions': new_questions})
-    else:
-        return render(request, 'polls/management.html',
-                      {'new_questions': new_questions})
 
-
-def management_update(request):
-    return management(request, True)
+    return render(request, template, {'new_questions': new_questions})

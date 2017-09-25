@@ -76,7 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Redis URL
-REDIS_URL = "redis://localhost:6379/14"
+# REDIS_URL = "redis://localhost:6379/14"
 SESSION_REDIS_HOST = 'localhost'
 
 # Channels
@@ -85,7 +85,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "asgi_redis.RedisChannelLayer",
         "ROUTING": "mysite.routing.channel_routing",
         "CONFIG": {
-            "hosts": [(REDIS_URL, 6379)],
+            "hosts": [("localhost", 6379)],
         },
     },
 }
