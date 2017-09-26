@@ -20,13 +20,23 @@
 		console.log("Created WebSocket connection.");
 	}
 	socket.onmessage = function message(event) {
-		$.ajax({
-			url: "{% url 'polls:management-update' %}",
-			success: function(data) {
-				$('#updating-part').html(data);
-			}
-		});
-	}
+		var data = JSON.parse(event.data);
+		var question_id = data.payload.pk;
+		var question_text = data.payload.data.question_text;
+		if (data.payload.action == 'create') {
+			$('ul').prepend(('<li data-question="' + question_id + '">' + question_text + '</li>'));
+		} else if (data.payload.action == 'update') {
+			var question = $('li').filter(function ( question ) {
+				return $(this).data('question') == question_id;
+			});
+			question.html(question_text);
+		} else if (data.payload.action == 'delete') {
+			var question = $('li').filter(function ( question ) {
+				return $(this).data('question') == question_id;
+			});
+			question.remove();
+		};
+	};
 	if (socket.readyState == WebSocket.OPEN) {
 		socket.onopen();
 	}

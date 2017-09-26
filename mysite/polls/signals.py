@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
-from django.db.models.signals import post_migrate, post_save
+from django.db.models.signals import post_migrate, post_save, post_delete
 from django.dispatch import receiver
 
 from .models import Question, QuestionHistory
@@ -44,12 +44,12 @@ def save_question_creation_time(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=Question)
-def update_management_page(sender, instance, created, **kwargs):
+@receiver(post_delete, sender=Question)
+def update_management_page(sender, **kwargs):
     """
     If a new question gets created, the function sends a message, which contains id and
     text of the question, to the management group.
     """
-    if created:
-        Group("management-signals").send({
-            'text': json.dumps({})
-        })
+    Group("management-signals").send({
+        'text': json.dumps({})
+    })

@@ -1,6 +1,6 @@
 {% if new_questions %}
 	{% for question in new_questions %}
-		<li>
+		<li data-question="{{ question.question_text }}">
 			{{ question.question_text }}
 		</li>
 	{% endfor %}

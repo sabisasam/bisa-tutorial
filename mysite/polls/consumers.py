@@ -25,7 +25,7 @@ def ws_disconnect(message):
 class Demultiplexer(WebsocketDemultiplexer):
 
 	consumers = {
-		"question": QuestionBinding.consumer,
+		"management": QuestionBinding.consumer,
 	}
 
 	def connection_groups(self):
