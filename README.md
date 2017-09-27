@@ -1,12 +1,14 @@
 # bisa-tutorial
 
 
+
 ## 1) Tutorial Part 1
 
 The project mysite was set up and the polls app got created.
 The polls app got a simple index view with the message:
 
     "Hello, world. You're at the polls index."
+
 
 
 ## 2) Tutorial Part 2
@@ -18,12 +20,14 @@ A choice is assigned to exactly one question and also has choice_text and votes 
 At least an user who can login to the admin site got created and the polls app got modifiable in the admin.
 
 
+
 ## 3) Tutorial Part 3
 
 A detail, results and vote view as well as a detail template got added.
 The detail view with its template shows the question text and the choices for this question.
 Both other views show a simple sentence with the corresponding question ID.
 The index view and its template got modified so now they list the 5 latest questions.
+
 
 
 ## 4) Tutorial Part 4
@@ -36,6 +40,7 @@ Now the vote view adds 1 to the vote counter of the selected choice.
 If the vote button got clicked and no choice was selected, the sentence "You didn't select a choice." appears above the choices.
 The results view and its template show the question text, its choices with their number of votes and a link to the detail page of that question to vote again.
 Finally the index, detail and results view were revised to use generic views.
+
 
 
 ## 5) Tutorial Part 5
@@ -60,9 +65,11 @@ QuestionResultsViewTests works similar to QuestionDetailViewTests but refers to 
 The get_queryset() function of ResultsView is implemented quite the same as the function of DetailView.
 
 
+
 ## 6) Tutorial Part 6
 
 At the index page, the color of question links was set to green and a background image was added.
+
 
 
 ## 7) Tutorial Part 7
@@ -73,6 +80,7 @@ The edit form for questions got restructured and the possibility to set choices 
 The admin change list now shows more information about the questions.
 Also a filter sidebar to filter by date published and a search box to search for questions were added.
 Finally, the admin site name got changed to "Polls Administration".
+
 
 
 ## 8) Tutorial Part 8
@@ -92,6 +100,7 @@ A .gitignore file were created and modified.
 It tells which files should be ignored by Git.
 
 
+
 ## 9) Signal Handling
 
 A model named QuestionHistory with question and creation_time as its attributes got added.
@@ -99,6 +108,7 @@ A model named QuestionHistory with question and creation_time as its attributes 
 If a question is added to the database, an instance of QuestionHistory gets created.
 The attribute creation_time will be set to the datetime at that moment and question is simply the question it relates to.
 The question attribute will be set to null if the question object gets deleted.
+
 
 
 ## 10) Custom Permissions
@@ -110,10 +120,12 @@ In class Choice, the permission to vote for a choice were added.
 And in class QuestionHistory, it's the permission to view the question history.
 
 
+
 ## 11) Signals and Permissions for All Classes at the Same Time
 
 Changed custom permissions.
 Added function add_permissions which automatically adds view and list permissions for every content type after migration if they don't exist already.
+
 
 
 ## 12) Django Packages
@@ -121,6 +133,7 @@ Added function add_permissions which automatically adds view and list permission
 Added django-extensions to installed apps.
 
 Changed Question model to be a TimeStampedModel and adjusted save_question_creation_time function in the QuestionHistory model so now it uses the created attribute of Question model.
+
 
 
 ## 13) Question Display
@@ -131,6 +144,7 @@ The top button redirects to a page from where you can choose which question to d
 The bottom button changes the question status to archived.
 
 Archived questions won't be shown in this question display.
+
 
 
 ## 14) Channels
@@ -144,9 +158,11 @@ The function ws_message deals with messages and ws_disconnect discards a connect
 Channel routing is contained in polls/routing.py and it maps channels to consumer functions.
 
 
+
 ## 15) Management Page
 
 The code which belongs to the Channels part got separated from the polls app and put into an extra chat app.
 
-A management page got added which lists all questions which are added within the last 24 hours.
-The list gets automatically updated if a new question gets created.
+Two versions of management page got added, one working with Signals and one with Data Binding.
+Each of them lists all questions which are added within the last 24 hours.
+The lists get automatically updated if a question gets created, updated or deleted.

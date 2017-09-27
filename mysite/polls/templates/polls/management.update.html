@@ -1,6 +1,6 @@
 {% if new_questions %}
 	{% for question in new_questions %}
-		<li data-question="{{ question.question_text }}">
+		<li id="{{ question.id }}">
 			{{ question.question_text }}
 		</li>
 	{% endfor %}
@@ -11,5 +11,5 @@
 		{% endfor %}
 	</ul>
 {% else %}
-	<p>No new question available.</p>
+	<p id="notification">No new question available.</p>
 {% endif %}

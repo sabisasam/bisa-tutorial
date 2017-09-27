@@ -6,9 +6,7 @@
 {% block content %}
 <h3>New questions:</h3>
 <ul>
-	<div id="updating-part">
 	{% include "polls/management.update.html" with new_questions=new_questions %}
-	</div>
 </ul>
 {% endblock %}
 
@@ -21,20 +19,21 @@
 	}
 	socket.onmessage = function message(event) {
 		var data = JSON.parse(event.data);
-		var question_id = data.payload.pk;
 		var question_text = data.payload.data.question_text;
+		var question_id = data.payload.pk;
+		var li_id = '#' + question_id;
 		if (data.payload.action == 'create') {
-			$('ul').prepend(('<li data-question="' + question_id + '">' + question_text + '</li>'));
+			if ($('li').length == 0) {
+				$('#notification').remove();
+			};
+			$('ul').prepend(('<li id="' + question_id + '">' + question_text + '</li>'));
 		} else if (data.payload.action == 'update') {
-			var question = $('li').filter(function ( question ) {
-				return $(this).data('question') == question_id;
-			});
-			question.html(question_text);
+			$(li_id).replaceWith('<li id="' + question_id + '">' + question_text + '</li>');
 		} else if (data.payload.action == 'delete') {
-			var question = $('li').filter(function ( question ) {
-				return $(this).data('question') == question_id;
-			});
-			question.remove();
+			$(li_id).remove();
+			if ($('li').length == 0) {
+				$('ul').prepend('<p id="notification">No new question available.</p>');
+			};
 		};
 	};
 	if (socket.readyState == WebSocket.OPEN) {
