@@ -166,3 +166,15 @@ The code which belongs to the Channels part got separated from the polls app and
 Two versions of management page got added, one working with Signals and one with Data Binding.
 Each of them lists all questions which are added within the last 24 hours.
 The lists get automatically updated if a question gets created, updated or deleted.
+
+
+
+## 16) Template Tag
+
+The templatetags directory got created in the polls app through running the following command:
+
+    $ python manage.py create_template_tags polls
+
+In polls/templatetags/polls_tags.py a template tag named get_question got implemented.
+It gets a value and tries to return a question which has this value as its ID.
+It will return None if it fails or a random question if value is None.

@@ -9,9 +9,10 @@ register = template.Library()
 @register.filter
 def get_question(value):
 	"""
-	Returns question with value as given ID.
+	Returns a question which has value as its ID.
 	"""
 	if value == None:
+		# value is None, return random question
 		num_questions = Question.objects.all().count()
 		if num_questions > 0:
 			random_question = Question.objects.all()[randint(0, num_questions - 1)]
