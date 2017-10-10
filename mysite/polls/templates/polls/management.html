@@ -1,0 +1,34 @@
+{% extends "polls/base.html" %}
+{% load static %}
+
+{% block title %}Management Page{% endblock %}
+
+{% block content %}
+<h3>New questions:</h3>
+<ul>
+	<div id="updating-part">
+	{% include "polls/management.questions.html" with new_questions=new_questions %}
+	</div>
+</ul>
+{% endblock %}
+
+{% block script %}
+<script src="{% static '/polls/js/jquery-3.2.1.min.js' %}"></script>
+<script>
+	var socket = new WebSocket("ws://" + window.location.host + "/management/");
+	socket.onopen = function open() {
+		console.log("Created WebSocket connection.");
+	}
+	socket.onmessage = function message(event) {
+		$.ajax({
+			url: "{% url 'polls:management-update' %}",
+			success: function(data) {
+				$('#updating-part').html(data);
+			}
+		});
+	}
+	if (socket.readyState == WebSocket.OPEN) {
+		socket.onopen();
+	}
+</script>
+{% endblock %}

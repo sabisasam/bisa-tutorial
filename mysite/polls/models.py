@@ -1,24 +1,32 @@
 import datetime
 
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.utils import timezone
-
-# imports for function add_permissions
-from django.db.models.signals import post_migrate
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import Permission
+from django_extensions.db.models import TimeStampedModel
 
 
-class Question(models.Model):
+class Question(TimeStampedModel):
+    """
+    A question object has a question_text attribute, which contains the question text,
+    a pub_date attribute, telling you when the question was or will be published, an
+    archived attribute, which is True if the question is archived, a created attribute,
+    containing the creation time of the question, and an id attribute, which is the
+    primary key.
+    """
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
-    
+    archived = models.BooleanField(default=False)
+
     def __str__(self):
+        """
+        Defines representation of a question object.
+        """
         return self.question_text
-    
+
     def was_published_recently(self):
+        """
+        Tells if a question was published within the last 24 hours.
+        """
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
     was_published_recently.admin_order_field = 'pub_date'
@@ -27,50 +35,47 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
+    """
+    A choice object belongs to a question object. It has the attributes choice_text,
+    containing text of the choice, as well as votes, which tells how often the choice
+    was voted, and id, which is the automatic primary key field.
+    """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
-    
+
     def __str__(self):
+        """
+        Defines representation of a choice object.
+        """
         return self.choice_text
 
     class Meta:
+        """
+        Defines specific permissions for Choice model.
+        """
         permissions = (
             ("vote_choice", "Can vote for a choice"),
         )
 
 
 class QuestionHistory(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.SET_NULL, blank=True, null=True)
+    """
+    An object of the QuestionHistory model is automatically created when a question object
+    gets created. The question attribute points to the correlating question as long as
+    it exists and will be NULL if the question gets deleted. The creation_time attribute
+    contains the creation time of the question and the id field holds the primary key.
+    """
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True)
     creation_time = models.DateTimeField('date created')
 
     def __str__(self):
+        """
+        Defines representation of a questionHistory object.
+        """
         time = self.creation_time.strftime('%b. %d, %Y, %X')
         return time
-
-    @receiver(post_save, sender=Question)
-    def save_question_creation_time(sender, instance, created, **kwargs):
-        if created:
-            obj, obj_created = QuestionHistory.objects.get_or_create(
-                question=instance,
-                defaults={'creation_time': timezone.now()},
-            )
-
-
-@receiver(post_migrate)
-def add_permissions(sender, **kwargs):
-    """
-    Add view and list permissions to all content types.
-    """
-    for content_type in ContentType.objects.all():
-        for action in ['view', 'list']:
-            codename = "%s_%s" % (action, content_type.model)
-            try:
-                Permission.objects.get(content_type=content_type, codename=codename)
-            except Permission.DoesNotExist:
-                Permission.objects.create(
-                    content_type=content_type,
-                    codename=codename,
-                    name="Can %s %s" % (action, content_type.name),
-                )
-                print("Added %s permission for %s" % (action, content_type.name))
