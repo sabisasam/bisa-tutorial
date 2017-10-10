@@ -74,7 +74,7 @@ At the index page, the color of question links was set to green and a background
 
 ## 7) Tutorial Part 7
 
-The admin form was edited.  
+The admin form was edited.
 
 The edit form for questions got restructured and the possibility to set choices was added.
 The admin change list now shows more information about the questions.
@@ -153,7 +153,7 @@ The file mysite/settings.py got changed for use of channels.
 The models Room and Message got added to polls/models.py.
 They are used in polls/consumers.py which contains four functions or consumers.
 The function msg_consumer in polls/consumers.py sends incoming messages to listening sockets.
-The consumer ws_connect accepts connection requests. 
+The consumer ws_connect accepts connection requests.
 The function ws_message deals with messages and ws_disconnect discards a connection.
 Channel routing is contained in polls/routing.py and it maps channels to consumer functions.
 
