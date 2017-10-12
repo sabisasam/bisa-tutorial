@@ -1,0 +1,24 @@
+{
+  "questions": [
+    {
+      "question_text": "What's up?",
+      "pub_date": "2017-10-20T12:00:00.000Z",
+      "archived": false,
+      "id": 1
+    }
+  ],
+  "choices": [
+    {
+      "choice_text": "The sky.",
+      "votes": 0,
+      "question": 1,
+      "id": 1
+    },
+    {
+      "choice_text": "Not much.",
+      "votes": 0,
+      "question": 1,
+      "id": 2
+    }
+  ]
+}

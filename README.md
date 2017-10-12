@@ -74,7 +74,7 @@ At the index page, the color of question links was set to green and a background
 
 ## 7) Tutorial Part 7
 
-The admin form was edited.  
+The admin form was edited.
 
 The edit form for questions got restructured and the possibility to set choices was added.
 The admin change list now shows more information about the questions.
@@ -153,7 +153,7 @@ The file mysite/settings.py got changed for use of channels.
 The models Room and Message got added to polls/models.py.
 They are used in polls/consumers.py which contains four functions or consumers.
 The function msg_consumer in polls/consumers.py sends incoming messages to listening sockets.
-The consumer ws_connect accepts connection requests. 
+The consumer ws_connect accepts connection requests.
 The function ws_message deals with messages and ws_disconnect discards a connection.
 Channel routing is contained in polls/routing.py and it maps channels to consumer functions.
 
@@ -178,3 +178,125 @@ The templatetags directory got created in the polls app through running the foll
 In polls/templatetags/polls_tags.py a template tag named get_question got implemented.
 It gets a value and tries to return a question which has this value as its ID.
 It will return None if it fails or a random question if value is None.
+
+
+
+## 17) REST Framework
+
+### 17.1) Requests and Beautiful Soup
+
+The instructions of the [Short Intro to Scraping](https://gist.github.com/bradmontgomery/1872970) were followed.
+A few things were done differently because the given link in the intro doesn't work anymore.
+
+The tools get installed through:
+
+    $ pip install beautifulsoup4
+    $ pip install requests
+
+The Python shell is used for all the following inputs.
+The page http://www.oreilly.com/free/reports.html is used for the get request.
+
+```pycon
+>>> import requests
+>>> result = requests.get("http://www.oreilly.com/free/reports.html")
+```
+
+The result gets checked through:
+
+```pycon
+>>> result.status_code
+200
+>>> result.headers
+{'Server': 'Apache', 'Last-Modified': ...
+```
+
+The content gets stored in a variable:
+
+```pycon
+>>> c = result.content
+```
+
+It gets parsed with Beautiful Soup through the following
+(replace `bs4` with `BeautifulSoup` if the source were downloaded and not installed with pip):
+
+```pycon
+>>> from bs4 import BeautifulSoup
+>>> soup = BeautifulSoup(c)
+>>> samples = soup.find_all("a", { "data-container": "body" })
+>>> samples[0]
+<a data-container="body" data-content= ...
+```
+
+The book titles (as keys) and the corresponding links (as values) get saved in `data`:
+
+```pycon
+>>> data = {}
+>>> for a in samples:
+...     title = a.attrs['title']
+...     data[title] = a.attrs['href']
+... 
+>>> for key, value in data.items():
+...     print(key + '\n' + value + '\n')
+... 
+The New Manager Mindset
+http:// ...
+```
+
+### 17.2) JSON Server
+
+The steps and code lines are taken from [here](https://github.com/typicode/json-server) and [here](http://www.betterpixels.co.uk/projects/2015/05/09/mock-up-your-rest-api-with-json-server/).
+
+A file named data.json got created which specifies endpoints that should be provided.
+The endpoints are /questions and /choices.
+A sample question and related choices were added to have some data.
+A configuration file named json-server.json got created for the possibility of saving option settings.
+
+To start the JSON server, open command prompt (or something similar) and run the following:
+
+    $ json-server data.json
+
+Open a browser (like Chrome or Firefox), go to http://localhost:3000/ and open the browser's developer tools to use the console.
+The data.json file can be modified through pasting the following snippets into console:
+
+Add a question with `question_text`, `pub_date`, `archived` and `id` as its attributes
+(`id` is given automatically and will be 2 because in this case a question with id=1 already exists):
+
+```javascript
+fetch('http://localhost:3000/questions/', {
+    method: 'post',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "question_text": "What is the meaning of life?",
+        "pub_date": "2017-10-21T13:08:09.381Z",
+        "archived": false
+    })
+})
+```
+
+Edit question with id=2:
+
+```javascript
+fetch('http://localhost:3000/questions/2', {
+    method: 'put',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "question_text": "What is the meaning of life?",
+        "pub_date": "2017-10-21T13:08:09.381Z",
+        "archived": true
+    })
+})
+```
+
+Delete question with id=2:
+
+```javascript
+fetch('http://localhost:3000/questions/2', {
+    method: 'delete',
+})
+```
