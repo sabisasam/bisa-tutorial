@@ -307,3 +307,7 @@ fetch('http://localhost:3000/questions/2', {
 
 Django messages were already used in the base.html template of the polls app but not each template extended the file or dealt with those messages itself.
 So those templates got changed to handle messages in one of those ways.
+
+
+
+## 19) Fortune
