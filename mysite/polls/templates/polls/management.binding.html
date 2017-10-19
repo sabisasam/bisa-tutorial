@@ -1,0 +1,43 @@
+{% extends "polls/base.html" %}
+{% load static %}
+
+{% block title %}Management Page - Binding{% endblock %}
+
+{% block content %}
+<h3>New questions:</h3>
+<ul>
+	{% include "polls/management.update.html" with new_questions=new_questions %}
+</ul>
+{% endblock %}
+
+{% block script %}
+<script src="{% static '/polls/js/jquery-3.2.1.min.js' %}"></script>
+<script>
+	var socket = new WebSocket("ws://" + window.location.host + "/management/binding/");
+	socket.onopen = function open() {
+		console.log("Created WebSocket connection.");
+	}
+	socket.onmessage = function message(event) {
+		var data = JSON.parse(event.data);
+		var question_text = data.payload.data.question_text;
+		var question_id = data.payload.pk;
+		var li_id = '#' + question_id;
+		if (data.payload.action == 'create') {
+			if ($('li').length == 0) {
+				$('#notification').remove();
+			};
+			$('ul').prepend(('<li id="' + question_id + '">' + question_text + '</li>'));
+		} else if (data.payload.action == 'update') {
+			$(li_id).replaceWith('<li id="' + question_id + '">' + question_text + '</li>');
+		} else if (data.payload.action == 'delete') {
+			$(li_id).remove();
+			if ($('li').length == 0) {
+				$('ul').prepend('<p id="notification">No new question available.</p>');
+			};
+		};
+	};
+	if (socket.readyState == WebSocket.OPEN) {
+		socket.onopen();
+	}
+</script>
+{% endblock %}

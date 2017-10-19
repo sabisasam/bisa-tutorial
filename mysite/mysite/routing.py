@@ -1,10 +1,26 @@
+from channels import include, route_class
 from channels.routing import route
-from polls.consumers import msg_consumer, ws_connect, ws_message, ws_disconnect
+
+from chat import consumers as chat
+from polls import consumers as polls
+
+
+chat_websocket = [
+	route("chat-messages", chat.msg_consumer),
+	route("websocket.connect", chat.ws_connect),
+	route("websocket.receive", chat.ws_message),
+	route("websocket.disconnect", chat.ws_disconnect),
+]
+
+
+polls_websocket = [
+	route("websocket.connect", polls.ws_connect),
+	route("websocket.disconnect", polls.ws_disconnect),
+]
 
 
 channel_routing = [
-	route("chat-messages", msg_consumer),
-	route("websocket.connect", ws_connect),
-	route("websocket.receive", ws_message),
-	route("websocket.disconnect", ws_disconnect),
+	include(chat_websocket, path=r'^/chat/(?P<room_name>[a-zA-Z0-9_]+)/$'),
+	include(polls_websocket, path=r'^/management/signals/$'),
+	route_class(polls.Demultiplexer, path=r'/management/binding/$')
 ]
