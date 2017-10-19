@@ -67,7 +67,8 @@ def vote(request, question_id):
     the function adds 1 to the vote counter of the choice. If no, it
     returns an error message.
     """
-    question = get_object_or_404(Question, pk=question_id)
+    published_questions = Question.objects.filter(pub_date__lte=timezone.now())
+    question = get_object_or_404(published_questions, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
@@ -133,6 +134,8 @@ def questions(request):
     """
     question_list = Question.objects.filter(
         archived=False).order_by('pub_date')
+    if not question_list:
+        return render(request, 'polls/questions.html', {'no_questions': True})
     # show 1 question per page
     paginator = Paginator(question_list, 1)
 

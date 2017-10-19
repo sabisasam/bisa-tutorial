@@ -1,5 +1,9 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
 {% if random_question %}
 	{% include "polls/detail.html" with question=random_question %}
 {% else %}
 	<p>No published question available.</p>
 {% endif %}
+{% endblock %}
