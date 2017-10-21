@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from fortune.models import Category, get_fortunes_path, get_available_pack_names, PackAlreadyLoadedError, UnavailablePackError
+from fortune.models import Category, get_available_pack_names, PackAlreadyLoadedError, UnavailablePackError
 
 
 def index(request):
