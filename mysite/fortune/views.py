@@ -14,10 +14,9 @@ def index(request):
                'gems',
                'oneliners']
                # IntegrityError: UNIQUE constraint failed: fortune_fortune.category_id, fortune_fortune.text
-    #packs = get_available_pack_names()
-    #packs = [pack for pack in packs if not pack.endswith('.dat') and not pack.endswith('.pdat')]
-    #packs = [pack for pack in packs if pack not in trouble]
-    packs = ['shlomif-fav']
+    packs = get_available_pack_names()
+    packs = [pack for pack in packs if not pack.endswith('.dat') and not pack.endswith('.pdat')]
+    packs = [pack for pack in packs if pack not in trouble]
     for pack in packs:
         try:
             Category.load(pack)
