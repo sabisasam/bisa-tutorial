@@ -59,21 +59,21 @@ bunnies, who will eat it.
     -- Joel Spolsky
     -- Painless Bug Tracking ( http://www.joelonsoftware.com/articles/fog0000000029.html )
 %
-A lot of software developers are seduced by the old “80/20” rule. It seems to
+A lot of software developers are seduced by the old "80/20" rule. It seems to
 make a lot of sense: 80% of the people use 20% of the features. So you
 convince yourself that you only need to implement 20% of the features, and you
 can still sell 80% as many copies.
 
 Unfortunately, it’s never the same 20%. Everybody uses a different set of
 features. In the last 10 years I have probably heard of dozens of companies
-who, determined not to learn from each other, tried to release “lite” word
+who, determined not to learn from each other, tried to release "lite" word
 processors that only implement 20% of the features. This story is as old as
 the PC. Most of the time, what happens is that they give their program to a
 journalist to review, and the journalist reviews it by writing their review
-using the new word processor, and then the journalist tries to find the “word
-count” feature which they need because most journalists have precise word
-count requirements, and it’s not there, because it’s in the “80% that nobody
-uses,” and the journalist ends up writing a story that attempts to claim
+using the new word processor, and then the journalist tries to find the "word
+count" feature which they need because most journalists have precise word
+count requirements, and it’s not there, because it’s in the "80% that nobody
+uses," and the journalist ends up writing a story that attempts to claim
 simultaneously that lite programs are good, bloat is bad, and I can’t use this
 damn thing ’cause it won’t count my words. If I had a dollar for every time
 this has happened I would be very happy.
@@ -135,11 +135,11 @@ closer to shipping software, activity becomes frenetic as everybody scrambles
 to finish all the things that need to be done in time for the deadline. In the
 typical crappy movie, there’s a mad rush of typing in a room full of cool
 alterna-dressed programmers with found-object earrings and jeans jackets.
-Somebody stands up and shouts to the room in general “I need the Jiff
-subroutine! Somebody give me the Jiff subroutine!” A good looking young woman
-in Vivienne Tam urbanwear throws a floppy disk at him. “Thanks!” As the second
+Somebody stands up and shouts to the room in general "I need the Jiff
+subroutine! Somebody give me the Jiff subroutine!" A good looking young woman
+in Vivienne Tam urbanwear throws a floppy disk at him. "Thanks!" As the second
 hand swoops towards the :00, the whole team waits breathlessly around Ryan
-Phillipe’s computer and watches the “copy” progress indicator as the final
+Phillipe’s computer and watches the "copy" progress indicator as the final
 bits are put onto a floppy disk with less than a second to spare before the VC
 cuts off funding. … On good teams, the days before shipping just get quieter
 and quieter as programmers literally run out of things to do one at a time.
@@ -180,8 +180,8 @@ for 6 months in a submarine. I swear I will.
 But the idea of unifying the mess of Visual Basic and Windows API programming
 by creating a completely new, ground-up programming environment with not one,
 not two, but three languages (or are there four?) is sort of like the idea of
-getting two quarreling kids to stop arguing by shouting “shut up!” louder than
-either of them. It only works on TV. In real life, when you shout “shut up!”
+getting two quarreling kids to stop arguing by shouting "shut up!" louder than
+either of them. It only works on TV. In real life, when you shout "shut up!"
 to two people arguing loudly, you just create a louder three-way argument.
 
     -- Joel Spolsky
@@ -205,8 +205,8 @@ look at them any more.
     -- Joel Spolsky
     -- How Microsoft Lost the API War ( http://www.joelonsoftware.com/articles/APIWar.html )
 %
-One of the biggest questions you’re going to be asking now is, “How much
-should I charge for my software?” When you ask the experts they don’t seem to
+One of the biggest questions you’re going to be asking now is, "How much
+should I charge for my software?" When you ask the experts they don’t seem to
 know. Pricing is a deep, dark mystery, they tell you. The biggest mistake
 software companies make is charging too little, so they don’t get enough
 income, and they have to go out of business. An even bigger mistake, yes, even
@@ -240,7 +240,7 @@ mean! Humps mean local maxima! Or camels. But here they mean local maxima!
     -- Joel Spolsky
     -- Camels and Rubber Duckies ( http://www.joelonsoftware.com/articles/CamelsandRubberDuckies.html )
 %
-“O frabjous day! Callooh! Callay!” I chortle. We have found the optimum price,
+"O frabjous day! Callooh! Callay!" I chortle. We have found the optimum price,
 $220, and that’s how much you should charge for your software. Thanks for your
 time.
 
@@ -254,7 +254,7 @@ I see.
 
 Some of the more observant members of my audience have detected through
 careful analysis of the scrollbar position in their web browser that I might
-have something more to say other than “$220.”
+have something more to say other than "$220."
 
 Well, maybe. There’s just a tiny little loose end I left untied which I might
 as well tie up now if you’re all still up for it. Ok? OK!
@@ -295,7 +295,7 @@ Now, if you’re retired and living off of social security, $7 an hour sounds
 pretty good, so you do it, but if you’re a stock analyst at Merrill Lynch
 getting paid $12,000,000 a year to say nice things about piece-of-junk
 Internet companies, working for $7 an hour is a joke, and you’re not going to
-clip coupons. Heck, in one hour you could issue “buy” recommendations on ten
+clip coupons. Heck, in one hour you could issue "buy" recommendations on ten
 piece-of-junk Internet companies! So coupons are a way for consumer products
 companies to charge two different prices and effectively segment their market
 into two. Mail-in rebates are pretty much the same as coupons, with some other
@@ -306,10 +306,10 @@ marketed to in the future.
     -- Camels and Rubber Duckies ( http://www.joelonsoftware.com/articles/CamelsandRubberDuckies.html )
 %
 In the world of software, you can just make a version of your product called
-“Professional” and another version called “Home” with some inconsequential
+"Professional" and another version called "Home" with some inconsequential
 differences, and hope that the corporate purchasers (again, the people who are
 not spending their own money) will be too embarassed at the thought of using
-“Windows XP Home Edition” at work and they’ll buy the Pro edition. Home
+"Windows XP Home Edition" at work and they’ll buy the Pro edition. Home
 Edition at work? Somehow that feels like coming to work in your pyjamas! Ick!
 
     -- Joel Spolsky
@@ -318,13 +318,13 @@ Edition at work? Somehow that feels like coming to work in your pyjamas! Ick!
 Bad Idea #1: Site Licenses.
 
 The opposite of segmentation, really. I have certain competitors that do this:
-they charge small customers per-user but then there’s a “unlimited” license at
+they charge small customers per-user but then there’s a "unlimited" license at
 a fixed price. This is nutty, because you’re giving the biggest price break
 precisely to the largest customers, the ones who would be willing to pay you
 the most money. Do you really want IBM to buy your software for their 400,000
 employees and pay you $2000? Hmm?
 
-As soon as you have an “unlimited” price, you are instantly giving a gigantic
+As soon as you have an "unlimited" price, you are instantly giving a gigantic
 gift of consumer surplus to the least price-sensitive customers who should
 have been the cash cows of your business.
 
@@ -366,10 +366,10 @@ prices is like buying advertising and as such is an investment in the future.
     -- Camels and Rubber Duckies ( http://www.joelonsoftware.com/articles/CamelsandRubberDuckies.html )
 %
 You can have focus groups and ask people, but they’ll lie to you. Some people
-will lie to show off their generosity and wealth. “Heck, yeah, I’d buy a pair
-of $400 jeans in a New York Minute!” Other people will lie because they really
+will lie to show off their generosity and wealth. "Heck, yeah, I’d buy a pair
+of $400 jeans in a New York Minute!" Other people will lie because they really
 want your thing and they think you’ll decide to charge less money if they tell
-you a low number. “Blogging software? Hmm. I’d pay, at most, 38 cents.”
+you a low number. "Blogging software? Hmm. I’d pay, at most, 38 cents."
 
 Then you ask another focus group the next day, and this time, the first man to
 speak has a crush on a pretty woman in the group, and he wants to impress her,
@@ -391,8 +391,8 @@ And, in fact, you can’t even be sure that the demand curve is downward
 sloping.
 
 The only reason we assumed that the demand curve is downward sloping is that
-we assumed things like “if Freddy is willing to buy a pair of sneakers for
-$130, he is certainly willing to buy those same sneakers for $20.” Right? Ha!
+we assumed things like "if Freddy is willing to buy a pair of sneakers for
+$130, he is certainly willing to buy those same sneakers for $20." Right? Ha!
 Not if Freddy is an American teenager! American teenagers would not be caught
 dead in $20 sneakers. It’s, like, um, the death penalty? if you are wearing
 sneakers? that only cost $20 a pair? in school?
@@ -411,9 +411,9 @@ When you’re setting a price, you’re sending a signal. If your competitor’s
 software ranges in price from about $100 to about $500, and you decide, heck,
 my product is about in the middle of the road, so I’ll sell it for $300, well,
 what message do you think you’re sending to your customers? You’re telling
-them that you think your software is “eh.” I have a better idea: charge $1350.
-Now your customers will think, “oh, man, that stuff has to be the cat’s
-whiskers since they’re charging mad coin for it!”
+them that you think your software is "eh." I have a better idea: charge $1350.
+Now your customers will think, "oh, man, that stuff has to be the cat’s
+whiskers since they’re charging mad coin for it!"
 
 And then they won’t buy it because the limit on the corporate AMEX is $500.
 
@@ -463,9 +463,9 @@ they wander off and sabotage everything.
 %
 My first assignment at my first job was working at Microsoft, where I was told
 to come up with a new macro language strategy for Excel. Pretty soon, I had
-the first draft of the “Excel Basic” spec (which later evolved into Visual
+the first draft of the "Excel Basic" spec (which later evolved into Visual
 Basic for Applications, but that’s another story). Somehow, this mysterious
-group of people at Microsoft called the “Application Architecture” group got
+group of people at Microsoft called the "Application Architecture" group got
 wind of my spec, which must have concerned them, because for some reason they
 thought that they were in charge of things like macro language strategies, and
 they asked to see my spec.
@@ -482,12 +482,12 @@ to say.
 I sent them [= the Application Architecture group] a copy of my spec and went
 to meet them, in case they had something interesting to say.
 
-“Blah blah!” said one of them. “Blah blah blah, blah blah blah!” said another.
+"Blah blah!" said one of them. "Blah blah blah, blah blah blah!" said another.
 I don’t think they quite had anything interesting to say. They were very
 enamored of the idea of subclassing and sort of thought that people making
 macros in Excel wanted to subclass a lot of things. In any case, one of the
-fellows said, “Well, this is all very interesting. What’s next? Who has to
-approve your spec?”
+fellows said, "Well, this is all very interesting. What’s next? Who has to
+approve your spec?"
 
 I laughed. Even though I had only been at Microsoft for a few months, I knew
 that there was no such thing as somebody approving my spec. Hell, nobody had
@@ -525,13 +525,13 @@ coworkers, in the Redmond sun, when Pete Higgins came up to me. At that time
 Pete was the general manager for Office -- I knew who he was, of course, but
 didn’t expect that he knew me very well.
 
-- “How’s it going, Joel?” he asked.
+- "How’s it going, Joel?" he asked.
 
-“I hear you’ve been having some issues with the App Architecture group.”
+"I hear you’ve been having some issues with the App Architecture group."
 
-- “Oh no!” I said. “Nothing I can’t handle.”
+- "Oh no!" I said. "Nothing I can’t handle."
 
-- “Say no more,” he said, “I understand.” He left.
+- "Say no more," he said, "I understand." He left.
 
 By the next day the rumor had gotten back to me: the App Architecture group
 was disbanded. Not only that, but each member of the group was sent to a
@@ -552,7 +552,7 @@ can be captured as regularly-formatted, machine readable plain text. Such
 programs are valued because they can easily be incorporated into other
 programs or larger software systems by programmers. To take one miniscule
 example, there is a core value in the Unix culture, which Raymond calls
-“Silence is Golden,” that a program that has done exactly what you told it to
+"Silence is Golden," that a program that has done exactly what you told it to
 do successfully should provide no output whatsoever. It doesn’t matter if
 you’ve just typed a 300 character command line to create a file system, or
 built and installed a complicated piece of software, or sent a manned rocket
@@ -603,7 +603,7 @@ I’m going back to ones and zeros.
 Of course, these are not the only factors that determine success or failure:
 in particular, if you have a great software team working on a product that
 nobody wants, well, people aren’t going to want it. And it’s possible to
-imagine a team of “gunslingers” that doesn’t do any of this stuff that still
+imagine a team of "gunslingers" that doesn’t do any of this stuff that still
 manages to produce incredible software that changes the world. But, all else
 being equal, if you get these 12 things right, you’ll have a disciplined team
 that can consistently deliver.
@@ -611,28 +611,28 @@ that can consistently deliver.
     -- Joel Spolsky
     -- The Joel Test: 12 Steps to Better Code ( http://www.joelonsoftware.com/articles/fog0000000043.html )
 %
-The very first version of Microsoft Word for Windows was considered a “death
-march” project. It took forever. It kept slipping. The whole team was working
+The very first version of Microsoft Word for Windows was considered a "death
+march" project. It took forever. It kept slipping. The whole team was working
 ridiculous hours, the project was delayed again, and again, and again, and the
 stress was incredible. When the dang thing finally shipped, years late,
 Microsoft sent the whole team off to Cancun for a vacation, then sat down for
 some serious soul-searching.
 
 What they realized was that the project managers had been so insistent on
-keeping to the “schedule” that programmers simply rushed through the coding
+keeping to the "schedule" that programmers simply rushed through the coding
 process, writing extremely bad code, because the bug fixing phase was not a
 part of the formal schedule. There was no attempt to keep the bug-count down.
 Quite the opposite. The story goes that one programmer, who had to write the
-code to calculate the height of a line of text, simply wrote “return 12;” and
+code to calculate the height of a line of text, simply wrote "return 12;" and
 waited for the bug report to come in about how his function is not always
 correct. The schedule was merely a checklist of features waiting to be turned
-into bugs. In the post-mortem, this was referred to as “infinite defects
-methodology”.
+into bugs. In the post-mortem, this was referred to as "infinite defects
+methodology".
 
-To correct the problem, Microsoft universally adopted something called a “zero
-defects methodology”. Many of the programmers in the company giggled, since it
+To correct the problem, Microsoft universally adopted something called a "zero
+defects methodology". Many of the programmers in the company giggled, since it
 sounded like management thought they could reduce the bug count by executive
-fiat. Actually, “zero defects” meant that at any given time, the highest
+fiat. Actually, "zero defects" meant that at any given time, the highest
 priority is to eliminate bugs before writing any new code.
 
     -- Joel Spolsky
@@ -668,7 +668,7 @@ This has two implications.
 One: it’s crucial that tech support have access to the development team. This
 means that you can’t outsource tech support: they have to be right there at
 the same street address as the developers, with a way to get things fixed.
-Many software companies still think that it’s “economical” to run tech support
+Many software companies still think that it’s "economical" to run tech support
 in Bangalore or the Philippines, or to outsource it to another company
 altogether. Yes, the cost of a single incident might be $10 instead of $50,
 but you’re going to have to pay $10 again and again.
@@ -692,34 +692,34 @@ than being able to give the same answer to the same question again and again.
 %
 Microsoft’s Raymond Chen tells the story of a customer who complains that the
 keyboard isn’t working. Of course, it’s unplugged. If you try asking them if
-it’s plugged in, “they will get all insulted and say indignantly, ‘Of course
-it is! Do I look like an idiot?’ without actually checking.”
+it’s plugged in, "they will get all insulted and say indignantly, ‘Of course
+it is! Do I look like an idiot?’ without actually checking."
 
-“Instead,” Chen suggests, “say ‘Okay, sometimes the connection gets a little
+"Instead," Chen suggests, "say ‘Okay, sometimes the connection gets a little
 dusty and the connection gets weak. Could you unplug the connector, blow into
 it to get the dust out, then plug it back in?’
 
-“They will then crawl under the desk, find that they forgot to plug it in (or
+"They will then crawl under the desk, find that they forgot to plug it in (or
 plugged it into the wrong port), blow out the dust, plug it in, and reply,
-‘Um, yeah, that fixed it, thanks.’”
+‘Um, yeah, that fixed it, thanks.’"
 
 Many requests for a customer to check something can be phrased this way.
 Instead of telling them to check a setting, tell them to change the setting
-and then change it back “just to make sure that the software writes out its
-settings.”
+and then change it back "just to make sure that the software writes out its
+settings."
 
     -- Joel Spolsky
     -- Seven steps to remarkable customer service ( http://www.joelonsoftware.com/articles/customerservice.html )
 %
 When the Macintosh first came out, there was no software available for it. So
 obviously, Apple created a giant glossy catalog listing all the great software
-that was “available”. Half of the items listed said, in fine print, “under
-development,” and the other half couldn’t be had for love or money. Some were
+that was "available". Half of the items listed said, in fine print, "under
+development," and the other half couldn’t be had for love or money. Some were
 such lame products nobody would buy them. But even having a thick glossy
-catalog with one software “product” per page described in glowing prose
+catalog with one software "product" per page described in glowing prose
 couldn’t disguise the fact that you just could not buy a word processor or
-spreadsheet to run on your 128KB Macintosh. There were similar “software
-product guides” for NeXT and BeOS. (Attention, NeXT and BeOS bigots: I don’t
+spreadsheet to run on your 128KB Macintosh. There were similar "software
+product guides" for NeXT and BeOS. (Attention, NeXT and BeOS bigots: I don’t
 need any flak about your poxy operating systems, OK? Write your own column.)
 The only thing a software product guide tells you is that there is no software
 available for the system. When you see one of these beasts, run fleeing in the
@@ -729,7 +729,7 @@ opposite direction.
     -- Strategy Letter II: Chicken and Egg Problems ( http://www.joelonsoftware.com/articles/fog0000000054.html )
 %
 Amiga, Atari ST, Gem, IBM TopView, NeXT, BeOS, Windows CE, General Magic, the
-list of failed “new platforms” goes on and on. Because they are platforms,
+list of failed "new platforms" goes on and on. Because they are platforms,
 they are, by definition, not very interesting in and of themselves without
 juicy software to run on them. But, with very few exceptions (and I’m sure
 I’ll get a whole host of email from tedious supporters of arcane and unloved
@@ -746,15 +746,15 @@ for you, darling. You wrote a nice microEmacs clone for the Timex Sinclair
     -- Strategy Letter II: Chicken and Egg Problems ( http://www.joelonsoftware.com/articles/fog0000000054.html )
 %
 Software developers don’t really like to make schedules. Usually, they try to
-get away without one. “It’ll be done when it’s done!” they say, expecting that
+get away without one. "It’ll be done when it’s done!" they say, expecting that
 such a brave, funny zinger will reduce their boss to a fit of giggles, and in
 the ensuing joviality, the schedule will be forgotten.
 
 Most of the schedules you do see are halfhearted attempts. They’re stored on a
 file share somewhere and completely forgotten. When these teams ship, two
 years late, that weird guy with the file cabinet in his office brings the old
-printout to the post mortem, and everyone has a good laugh. “Hey look! We
-allowed two weeks for rewriting from scratch in Ruby!”
+printout to the post mortem, and everyone has a good laugh. "Hey look! We
+allowed two weeks for rewriting from scratch in Ruby!"
 
 Hilarious! If you’re still in business.
 
@@ -788,7 +788,7 @@ like this:
 
 Now, this poor guy has a boss who interrupts him every once in a while with a
 two-hour conversation about marlin fishing. Now, of course, John could have a
-task on his schedule called “Painful conversations about marlin,” and put that
+task on his schedule called "Painful conversations about marlin," and put that
 on his timesheet, but this might not be politically prudent. Instead, John
 just keeps the clock running. So his actual times look like this:
 
@@ -813,16 +813,16 @@ predicted when you did the original schedule.
     -- Evidence Based Scheduling ( http://www.joelonsoftware.com/items/2007/10/26.html )
 %
 Way back when I was working on Excel 5, our initial feature list was huge and
-would have gone way over schedule. “Oh my!” we thought. “Those are all super
-important features! How can we live without a macro editing wizard?”
+would have gone way over schedule. "Oh my!" we thought. "Those are all super
+important features! How can we live without a macro editing wizard?"
 
-As it turns out, we had no choice, and we cut what we thought was “to the
-bone” to make the schedule. Everybody felt unhappy about the cuts. To make
+As it turns out, we had no choice, and we cut what we thought was "to the
+bone" to make the schedule. Everybody felt unhappy about the cuts. To make
 people feel better, we told ourselves that we weren’t cutting the features, we
 were simply deferring them to Excel 6.
 
 As Excel 5 was nearing completion, I started working on the Excel 6 spec with
-a colleague, Eric Michelman. We sat down to go through the list of “Excel 6”
+a colleague, Eric Michelman. We sat down to go through the list of "Excel 6"
 features that had been punted from the Excel 5 schedule. Guess what? It was
 the shoddiest list of features you could imagine. Not one of those features
 was worth doing. I don’t think a single one of them ever was. The process of
@@ -844,7 +844,7 @@ Each Excel workbook is stored in a compound file.
 You see, Excel 97-2003 files are OLE compound documents, which are,
 essentially, file systems inside a single file. These are sufficiently
 complicated that you have to read another 9 page spec to figure that out. And
-these “specs” look more like C data structures than what we traditionally
+these "specs" look more like C data structures than what we traditionally
 think of as a spec. It’s a whole hierarchical file system.
 
 If you started reading these documents with the hope of spending a weekend
@@ -890,7 +890,7 @@ Yes. Also: Toyota can be deeded to your grandkids, but Honda will explode
 before you drive it home; Heath tastes totally incredible and Skor will make
 you vomit.
 
-    -- “a Hack”
+    -- "a Hack"
     -- PHP more maintainable than Perl, also Pepsi way better than Coke ( http://discuss.joelonsoftware.com/default.asp?joel.3.383234.18 )
 %
 A few months ago when we released CityDesk, I got an email from a customer
@@ -902,7 +902,7 @@ and Alt+F,S worked fine.
 
 Once you get into the habit of doing Alt+F,Alt+S to save, it becomes so
 automatic you don’t think of it as Alt+F,Alt+S. You think of it as save. And
-when you push the “save” button in your brain and the file you were working on
+when you push the "save" button in your brain and the file you were working on
 goes away, it makes you feel like you’re not in control of your environment.
 It’s a small thing, but about the fourth time that it happens, you’re going to
 be seriously unhappy. That’s why I spent several hours tracking down this bug
@@ -929,8 +929,8 @@ veteran currently running the team that’s going to bring you the next version
 of Internet Explorer, 8.0. The IE 8 team is in the process of making a
 decision that lies perfectly, exactly, precisely on the fault line smack in
 the middle of two different ways of looking at the world. It’s the difference
-between conservatives and liberals, it’s the difference between “idealists”
-and “realists,” it’s a huge global jihad dividing members of the same family,
+between conservatives and liberals, it’s the difference between "idealists"
+and "realists," it’s a huge global jihad dividing members of the same family,
 engineers against computer scientists, and Lexuses vs. olive trees.
 
 And there’s no solution. But it will be really, really entertaining to watch,
@@ -942,7 +942,7 @@ for every developer who needs to design interoperable systems.
     -- Martian Headsets ( http://www.joelonsoftware.com/items/2008/03/17.html )
 %
 And the whole problem hinges on the little tiny decision of what IE8 should do
-when it encounters a page that claims to support “standards”, but has probably
+when it encounters a page that claims to support "standards", but has probably
 only been tested against IE7.
 
 What the hell is a standard?
@@ -951,14 +951,14 @@ Don’t they have standards in all kinds of engineering endeavors? (Yes.)
 
 Don’t they usually work? (Mmmm…..)
 
-Why are “web standards” so frigging messed up? (It’s not just Microsoft’s
+Why are "web standards" so frigging messed up? (It’s not just Microsoft’s
 fault. It’s your fault too. And Jon Postel’s (1943-1998). I’ll explain that
 later.)
 
 There is no solution. Each solution is terribly wrong. Eric Bangeman at ars
-technica writes, “The IE team has to walk a fine line between tight support
+technica writes, "The IE team has to walk a fine line between tight support
 for W3C standards and making sure sites coded for earlier versions of IE still
-display correctly.” This is incorrect. It’s not a fine line. It’s a line of
+display correctly." This is incorrect. It’s not a fine line. It’s a line of
 negative width. There is no place to walk. They are damned if they do and
 damned if they don’t.
 
@@ -974,7 +974,7 @@ about when I referred to the Raymond Chen camp (pragmatists) at Microsoft vs.
 the MSDN camp (idealists), the MSDN camp having won, and now nobody can figure
 out where their favorite menu commands went in Microsoft Office 2007, and
 nobody wants Vista, and it’s all the same debate: whether you are an Idealist
-(”red”) or a Pragmatist (”blue”).
+("red") or a Pragmatist ("blue").
 
     -- Joel Spolsky
     -- Martian Headsets ( http://www.joelonsoftware.com/items/2008/03/17.html )
@@ -1082,7 +1082,7 @@ have bugs.
 
 Lo and behold, I discovered that very few of the bugs in there would have been
 discovered with pair programming or test driven development. Many of our
-“bugs” are really what XP calls stories -- basically, just feature requests.
+"bugs" are really what XP calls stories -- basically, just feature requests.
 
 A lot of the other bugs were only discovered after much use in the field. The
 Polish keyboard thing. There’s no way pair programming was going to find that.
@@ -1108,11 +1108,11 @@ company uses Polish Windows.
     -- Joel Spolsky
     -- Five Worlds ( http://www.joelonsoftware.com/articles/FiveWorlds.html )
 %
-“Seriously, there is no reason why the command line should be required to
+"Seriously, there is no reason why the command line should be required to
 configure Oracle just like there is no reason why the command line should be
 required to configure Linux. It is an indication of a company and people who
 are trying to raise the barrier to entry in order to hold on to revenue
-streams from support and training.”
+streams from support and training."
 
 You’re so right. I mean, all those wonderful GUI tools for Linux
 administration out there that Linux Inc. won’t let you use.
@@ -1129,7 +1129,7 @@ revenue from better tools against the lost sales revenue from more people
 wanting to buy their product because of the tools.
 
     -- Drew Kime
-    -- Comment on “Oracle - How Quaint?” ( http://discuss.joelonsoftware.com/default.asp?joel.3.637120.37 )
+    -- Comment on "Oracle - How Quaint?" ( http://discuss.joelonsoftware.com/default.asp?joel.3.637120.37 )
 %
 Think of the history of data access strategies to come out of Microsoft. ODBC,
 RDO, DAO, ADO, OLEDB, now ADO.NET - All New! Are these technological
@@ -1148,12 +1148,12 @@ cover fire so that they can move forward and you can’t, because this is how
 the game is played, Bubby. Are you going to support Hailstorm? SOAP? RDF? Are
 you supporting it because your customers need it, or because someone is firing
 at you and you feel like you have to respond? The sales teams of the big
-companies understand cover fire. They go into their customers and say, “OK,
+companies understand cover fire. They go into their customers and say, "OK,
 you don’t have to buy from us. Buy from the best vendor. But make sure that
 you get a product that supports (XML / SOAP / CDE / J2EE) because otherwise
-you’ll be Locked In The Trunk.” Then when the little companies try to sell
-into that account, all they hear is obedient CTOs parrotting “Do you have
-J2EE?” And they have to waste all their time building in J2EE even if it
+you’ll be Locked In The Trunk." Then when the little companies try to sell
+into that account, all they hear is obedient CTOs parrotting "Do you have
+J2EE?" And they have to waste all their time building in J2EE even if it
 doesn’t really make any sales, and gives them no opportunity to distinguish
 themselves. It’s a checkbox feature -- you do it because you need the checkbox
 saying you have it, but nobody will use it or needs it. And it’s cover fire.
@@ -1182,7 +1182,7 @@ sales are growing steadily. The People won’t stop buying it.
 So we did version 2.0. This was an attempt to add some of the most obviously
 needed features. While David worked on version 2.0 we honestly didn’t think it
 was worth that much effort, so he tended to do things in what you might call
-an “expedient” fashion rather than, say, an “elegant” fashion. Certain, ahem,
+an "expedient" fashion rather than, say, an "elegant" fashion. Certain, ahem,
 design issues in the original code were allowed to fester. There were two
 complete sets of nearly identical code for drawing the main bug-editing page.
 SQL statements were scattered throughout the HTML hither and yon, to and fro,
@@ -1190,7 +1190,7 @@ pho and ton. Our HTML was creaky and designed for those ancient browsers that
 were so buggy they could crash loading about:blank.
 
 Yeah, it worked brilliantly, we’ve been at zero known bugs for a while now.
-But inside, the code was, to use the technical term, a “big mess.” Adding new
+But inside, the code was, to use the technical term, a "big mess." Adding new
 features was a hemorrhoid. To add one field to the central bug table would
 probably require 50 modifications, and you’d still be finding places you
 forgot to modify long after you bought your first family carplane for those
@@ -1209,7 +1209,7 @@ development, and different rules apply to different worlds.
 
 You read a book about UML modeling, and nowhere does it say that it doesn’t
 make sense for programming device drivers. Or you read an article saying that
-“the 20MB runtime [required for .NET] is a NON issue” and it doesn’t mention
+"the 20MB runtime [required for .NET] is a NON issue" and it doesn’t mention
 the obvious: if you’re trying to write code for a 32KB ROM on a pager, it very
 much is an issue!
 
@@ -1241,11 +1241,11 @@ language, it all looks equally inscrutable. Until you understand the
 programming language itself, you can’t even see obvious syntactic errors.
 
 During the first phase of learning, you start to recognize the things that we
-usually refer to as “coding style.” So you start to notice code that doesn’t
+usually refer to as "coding style." So you start to notice code that doesn’t
 conform to indentation standards and Oddly-Capitalized variables.
 
-It’s at this point you typically say, “Blistering Barnacles, we’ve got to get
-some consistent coding conventions around here!”, and you spend the next day
+It’s at this point you typically say, "Blistering Barnacles, we’ve got to get
+some consistent coding conventions around here!", and you spend the next day
 writing up coding conventions for your team, and the next six days arguing
 about the One True Brace Style, and the next three weeks rewriting old code to
 conform to the One True Brace Style, until a manager catches you and screams
@@ -1290,15 +1290,15 @@ Perfectionism is a very dangerous quality in business and in life, because by
 being perfectionist about one thing you are, by definition, neglecting
 another. The three days I spent insuring that all icons in CityDesk 3.0 are
 displayed with perfect alpha-blended effects came at the price of having a web
-site where the descender of the “g” is not a hyperlink. And both are at the
+site where the descender of the "g" is not a hyperlink. And both are at the
 price of working on my next book, or writing another article for Joel on
 Software, or making CityDesk publish really big sites faster.
 
 If you’re noticing a recurring theme, it’s that I never like to talk about
-whether or not to do X. The question should never be “X, yes or no?” As long
+whether or not to do X. The question should never be "X, yes or no?" As long
 as you have limited time and resources, you always have to look at the *cost*
-and the *benefit* of X. Questions should be “Is X worth the time” or “Will X
-or Y have a greater return on investment?”
+and the *benefit* of X. Questions should be "Is X worth the time" or "Will X
+or Y have a greater return on investment?"
 
     -- Joel Spolsky
     -- News for 22-April-2004 ( http://www.joelonsoftware.com/items/2004/04/22.html )
@@ -1355,7 +1355,7 @@ If you can write, wherever you get hired, you’ll soon find that you’re getti
 asked to write the specifications and that means you’re already leveraging
 your influence and getting noticed by management.
 
-Most colleges designate certain classes as “writing intensive,” meaning, you
+Most colleges designate certain classes as "writing intensive," meaning, you
 have to write an awful lot to pass them. Look for those classes and take them!
 Seek out classes in any field that have weekly or daily written assignments.
 

@@ -3,10 +3,10 @@ lazy, that their brain only works properly one day out of ten, and that it’s
 only a matter of time until they’re found out.
 
 Paul Graham
-[“Great Hackers” (later edited out)](http://xrl.us/ho9c)
+["Great Hackers" (later edited out)](http://xrl.us/ho9c)
 
     -- Paul Graham
-    -- “Great Hackers” (old Version) ( http://web.archive.org/web/20040728182546/http://www.paulgraham.com/gh.html )
+    -- "Great Hackers" (old Version) ( http://web.archive.org/web/20040728182546/http://www.paulgraham.com/gh.html )
 %
 What they really mean is, don’t get demoralized. Don’t think that you can’t do
 what other people can. And I agree you shouldn’t underestimate your potential.
@@ -24,8 +24,8 @@ your other friends.
 %
 It could be that in Java’s case I’m mistaken. It could be that a language
 promoted by one big company to undermine another, designed by a committee for
-a “mainstream” audience, hyped to the skies, and beloved of the DoD [=
-“Department of Defense”], happens nonetheless to be a clean, beautiful,
+a "mainstream" audience, hyped to the skies, and beloved of the DoD [=
+"Department of Defense"], happens nonetheless to be a clean, beautiful,
 powerful language that I would love programming in. It could be, but it seems
 very unlikely.
 
@@ -46,22 +46,22 @@ own merits.
 %
 Bundling all these different types of work together in one department may be
 convenient administratively, but it’s confusing intellectually. That’s the
-other reason I don’t like the name “computer science.” Arguably the people in
+other reason I don’t like the name "computer science." Arguably the people in
 the middle are doing something like an experimental science. But the people at
 either end, the hackers and the mathematicians, are not actually doing
 science.
 
 The mathematicians don’t seem bothered by this. They happily set to work
 proving theorems like the other mathematicians over in the math department,
-and probably soon stop noticing that the building they work in says “computer
-science” on the outside. But for the hackers this label is a problem. If what
+and probably soon stop noticing that the building they work in says "computer
+science" on the outside. But for the hackers this label is a problem. If what
 they’re doing is called science, it makes them feel they ought to be acting
 scientific. So instead of doing what they really want to do, which is to
 design beautiful software, hackers in universities and research labs feel they
 ought to be writing research papers.
 
     -- Paul Graham
-    -- “Hackers and Painters” (the Essay) ( http://www.paulgraham.com/hp.html )
+    -- "Hackers and Painters" (the Essay) ( http://www.paulgraham.com/hp.html )
 %
 For example, I was taught in college that one ought to figure out a program
 completely on paper before even going near a computer. I found that I did not
@@ -128,26 +128,26 @@ my opinion, no language is worth using.
     -- Paul Graham
     -- The Hundred-Year Language ( http://www.paulgraham.com/hundred.html )
 %
-To the popular press, “hacker” means someone who breaks into computers. Among
+To the popular press, "hacker" means someone who breaks into computers. Among
 programmers it means a good programmer. But the two meanings are connected. To
-programmers, “hacker” connotes mastery in the most literal sense: someone who
+programmers, "hacker" connotes mastery in the most literal sense: someone who
 can make a computer do what he wants-- whether the computer wants to or not.
 
-To add to the confusion, the noun “hack” also has two senses. It can be either
+To add to the confusion, the noun "hack" also has two senses. It can be either
 a compliment or an insult. It’s called a hack when you do something in an ugly
 way. But when you do something so clever that you somehow beat the system,
 that’s also called a hack. The word is used more often in the former than the
 latter sense, probably because ugly solutions are more common than brilliant
 ones.
 
-Believe it or not, the two senses of “hack” are also connected. Ugly and
+Believe it or not, the two senses of "hack" are also connected. Ugly and
 imaginative solutions have something in common: they both break the rules. And
 there is a gradual continuum between rule breaking that’s merely ugly (using
 duct tape to attach something to your bike) and rule breaking that is
 brilliantly imaginative (discarding Euclidean space).
 
     -- Paul Graham
-    -- The Word “Hacker” ( http://www.paulgraham.com/gba.html )
+    -- The Word "Hacker" ( http://www.paulgraham.com/gba.html )
 %
 Hacking predates computers. When he was working on the Manhattan Project,
 Richard Feynman used to amuse himself by breaking into safes containing secret
@@ -164,11 +164,11 @@ drugs, money, sex, revenge. Intellectual curiosity was not one of the motives
 on the FBI’s list. Indeed, the whole concept seemed foreign to them.
 
     -- Paul Graham
-    -- The Word “Hacker” ( http://www.paulgraham.com/gba.html )
+    -- The Word "Hacker" ( http://www.paulgraham.com/gba.html )
 %
 When you read what the founding fathers had to say for themselves, they sound
-more like hackers. “The spirit of resistance to government,” Jefferson wrote,
-“is so valuable on certain occasions, that I wish it always to be kept alive.”
+more like hackers. "The spirit of resistance to government," Jefferson wrote,
+"is so valuable on certain occasions, that I wish it always to be kept alive."
 
 Imagine an American president saying that today. Like the remarks of an
 outspoken old grandmother, the sayings of the founding fathers have
@@ -180,7 +180,7 @@ Those in a position to impose rules naturally want them to be obeyed. But be
 careful what you ask for. You might get it.
 
     -- Paul Graham
-    -- The Word “Hacker” ( http://www.paulgraham.com/gba.html )
+    -- The Word "Hacker" ( http://www.paulgraham.com/gba.html )
 %
 If you work your way down the Forbes 400 making an x next to the name of each
 person with an MBA, you’ll learn something important about business school.
@@ -195,7 +195,7 @@ you’d do better to learn how to hack than get an MBA.
     -- Paul Graham
     -- How to Start a Startup ( http://www.paulgraham.com/start.html )
 %
-The aphorism “you can’t tell a book by its cover” originated in the times when
+The aphorism "you can’t tell a book by its cover" originated in the times when
 books were sold in plain cardboard covers, to be bound by each purchaser
 according to his own taste. In those days, you couldn’t tell a book by its
 cover. But publishing has advanced since then: present-day publishers work
@@ -279,9 +279,9 @@ dead-ends branching off all over. We can see this happening already. Cobol,
 for all its sometime popularity, does not seem to have any intellectual
 descendants. It is an evolutionary dead-end-- a Neanderthal language.
 
-I predict a similar fate for Java. People sometimes send me mail saying, “How
+I predict a similar fate for Java. People sometimes send me mail saying, "How
 can you say that Java won’t turn out to be a successful language? It’s already
-a successful language.” And I admit that it is, if you measure success by
+a successful language." And I admit that it is, if you measure success by
 shelf space taken up by books on it (particularly individual books on it), or
 by the number of undergrads who believe they have to learn it to get a job.
 When I say Java won’t turn out to be a successful language, I mean something
@@ -344,7 +344,7 @@ running a math journal.
 %
 If you go to see Silicon Valley, what you’ll see are buildings. But it’s the
 people that make it Silicon Valley, not the buildings. I read occasionally
-about attempts to set up “technology parks” in other places, as if the active
+about attempts to set up "technology parks" in other places, as if the active
 ingredient of Silicon Valley were the office space. An article about Sophia
 Antipolis bragged that companies there included Cisco, Compaq, IBM, NCR, and
 Nortel. Don’t the French realize these aren’t startups?
@@ -472,4 +472,4 @@ One measure of the incompetence of newspapers is that so many still make you
 register to read stories. I have yet to find a blog that tried that.
 
     -- Paul Graham
-    -- “What Business Can Learn from Open Source” (Footnote) ( http://www.paulgraham.com/opensource.html#f4n )
+    -- "What Business Can Learn from Open Source" (Footnote) ( http://www.paulgraham.com/opensource.html#f4n )

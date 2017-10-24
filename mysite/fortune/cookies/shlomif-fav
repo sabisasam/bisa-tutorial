@@ -60,11 +60,11 @@ grades of all the students who failed to 54%.
     -- Shlomi Fish
     -- Based on a Technion Legend
 %
-“God is Dead”
+"God is Dead"
 
 — Neitzsche
 
-“Neitzsche is Dead”
+"Neitzsche is Dead"
 
 — God
 
@@ -118,7 +118,7 @@ The word "Stalinism" is deprecated, the correct term is "GNU/Communism".
 -- Spotted on Slashdot
 
     -- k98sven
-    -- Slashdot Comment: “Re: Misread” ( http://slashdot.org/comments.pl?sid=34331&cid=3715569 )
+    -- Slashdot Comment: "Re: Misread" ( http://slashdot.org/comments.pl?sid=34331&cid=3715569 )
 %
 Personally, I'd have a far better time writing scripts if I had some more
 creative shells to script in…
@@ -2165,7 +2165,7 @@ Ask the maintainers of M::B, EU::MM and M::I to all export a `halt` function
 that does just this? That would also provide a convenient spot in the
 respective modules’ docs for related CPAN Testers arcana, so people wouldn’t
 have to stumble onto a wiki page in the bottom of a locked cabinet stuck in a
-disused lavatory with a sign on the door saying “beware the leopard” in order
+disused lavatory with a sign on the door saying "beware the leopard" in order
 to learn these trivia.
 
     -- Aristotle Pagaltzis
@@ -2627,10 +2627,10 @@ The post-Google standard company perks – free food, on-site exercise classes,
 company shuttles – make it trivial to speak only to fellow employees in daily
 life. If you spend all day with your co-workers, socialize only with your
 co-workers, and then come home and eat dinner with – you guessed it – your
-co-worker, you might go several years without hearing the words, “*Run Solaris
-on my desktop? Are you f—ing kidding me?*“
+co-worker, you might go several years without hearing the words, "*Run Solaris
+on my desktop? Are you f—ing kidding me?*"
 
-Schwartz’s “the financial crisis did it” explanation for Sun’s demise is a
+Schwartz’s "the financial crisis did it" explanation for Sun’s demise is a
 symptom of an inbred company culture in which employees at all levels
 voluntarily isolated themselves from the larger Silicon Valley culture. Tech
 journalists write incessantly about the exchange of expertise and best
@@ -2731,8 +2731,8 @@ technical debt. So why do we keep hearing that sentence?
     -- Gabor Szabo
     -- What does "If it ain't broke, don't fix it." really mean? ( http://szabgab.com/blog/2009/11/1259431123.html )
 %
-Often, when I ask the people I train if they know Perl, they tell me “I don't
-know Perl. I can only read it”. I wonder whether it indicates that Perl is not
+Often, when I ask the people I train if they know Perl, they tell me "I don't
+know Perl. I can only read it". I wonder whether it indicates that Perl is not
 a write-only language as some people like to claim.
 
     -- Gabor Szabo
