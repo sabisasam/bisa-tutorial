@@ -64,7 +64,7 @@ class Category(models.Model):
                 raise PackAlreadyLoadedError
             with open(pack_filename, 'r') as pack_file:
                 fortunes = pack_file.read()
-                for fortune in [f[:-1] for f in fortunes.split('\n%')]:
+                for fortune in fortunes.split('\n%\n'):
                     if fortune:  # No empty fortunes.
                         Fortune.objects.create(text=fortune, category=pack)
 
