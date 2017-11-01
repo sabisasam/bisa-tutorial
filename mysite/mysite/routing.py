@@ -2,6 +2,7 @@ from channels import include, route_class
 from channels.routing import route
 
 from chat import consumers as chat
+from fortune import consumers as fortune
 from polls import consumers as polls
 
 
@@ -22,5 +23,6 @@ polls_websocket = [
 channel_routing = [
 	include(chat_websocket, path=r'^/chat/(?P<room_name>[a-zA-Z0-9_]+)/$'),
 	include(polls_websocket, path=r'^/management/signals/$'),
+	route_class(fortune.Demultiplexer, path=r'/fortune/websocket/$'),
 	route_class(polls.Demultiplexer, path=r'/management/binding/$')
 ]

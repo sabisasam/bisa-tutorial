@@ -1,10 +1,7 @@
-import json
-
 from channels import Group
 from channels.generic.websockets import WebsocketDemultiplexer
 
 from .binding import QuestionBinding
-from .models import Question
 
 
 # belongs to Management Page - Signals
