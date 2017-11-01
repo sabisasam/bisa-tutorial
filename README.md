@@ -311,3 +311,7 @@ So those templates got changed to handle messages in one of those ways.
 
 
 ## 19) Fortune
+
+The Fortune Pages show a random quote, saying or something similar.
+The normal version of the page loads as long as fortune packs get loaded
+while the websocket version loads the packs in the background and updates the page afterwards.
