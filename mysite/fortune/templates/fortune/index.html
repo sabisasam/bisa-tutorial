@@ -1,0 +1,11 @@
+{% extends "fortune/base.html" %}
+
+{% block title %}Fortune Page - Overview{% endblock %}
+
+{% block content %}
+<h3>Which Fortune Page version do you want to display?</h3>
+<ul>
+	<li><a href="{% url 'fortune:fortune-normal' %}">normal version</a></li>
+	<li><a href="{% url 'fortune:fortune-websocket' %}">with websockets</a></li>
+</ul>
+{% endblock %}

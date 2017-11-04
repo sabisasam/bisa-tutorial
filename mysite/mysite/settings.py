@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'chat.apps.ChatConfig',
+    'fortune.apps.FortuneConfig',
     'polls.apps.PollsConfig',
 
     'django.contrib.admin',
