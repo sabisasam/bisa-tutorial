@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 
 from django.apps import apps
@@ -71,6 +72,9 @@ class Category(models.Model):
     def unload(self):
         self.delete()
 
+    def __str__(self):
+        return self.category
+
 
 class Fortune(models.Model):
     """
@@ -80,7 +84,7 @@ class Fortune(models.Model):
         Category,
         on_delete=models.CASCADE,
         related_name="fortunes")
-    text = models.TextField(primary_key=True)
+    text = models.TextField(unique=True)
 
     class Meta:
         """ """
@@ -92,8 +96,10 @@ class Fortune(models.Model):
     @classmethod
     def fortune(cls):
         """ """
-        fortune = cls.objects.order_by("?").first()
-        if fortune:
+        fortune_ids = cls.objects.values_list('id', flat=True)
+        if fortune_ids.exists():
+            random_id = random.sample(list(fortune_ids), 1)
+            fortune = cls.objects.get(id=random_id[0])
             return fortune.text
         else:
             return "Fortunes are not loaded, yet."

@@ -18,11 +18,13 @@
 	socket.onmessage = function message(event) {
 		var data = JSON.parse(event.data);
 		var id = data.payload.pk;
-		if (id >= num_packs && $('pre').text().includes("Fortunes are not loaded, yet.")) {
+		if (id >= num_packs) {
 			console.log("Finished loading fortune packs.");
-			$('pre').load(window.location.href + " pre", function() {
-				$(this).children().first().unwrap();
-			});
+			if ($('pre').text().includes("Fortunes are not loaded, yet.")) {
+				$('pre').load(window.location.href + " pre", function() {
+					$(this).children().first().unwrap();
+				});
+			};
 		};
 	};
 	if (socket.readyState == WebSocket.OPEN) {

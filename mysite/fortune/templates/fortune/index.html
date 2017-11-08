@@ -1,11 +1,14 @@
 {% extends "fortune/base.html" %}
+{% load fortunes %}
 
 {% block title %}Fortune Page - Overview{% endblock %}
 
 {% block content %}
-<h3>Which Fortune Page version do you want to display?</h3>
+<pre>{% fortune %}</pre>
+
+<h3>How do you want to load not yet loaded fortune packs?</h3>
 <ul>
-	<li><a href="{% url 'fortune:fortune-normal' %}">normal version</a></li>
-	<li><a href="{% url 'fortune:fortune-websocket' %}">with websockets</a></li>
+	<li><a href="{% url 'fortune:fortune-normal' %}">synchronously</a></li>
+	<li><a href="{% url 'fortune:fortune-websocket' %}">asynchronously (websockets)</a></li>
 </ul>
 {% endblock %}
