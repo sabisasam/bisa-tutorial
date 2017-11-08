@@ -11,4 +11,11 @@
 	<li><a href="{% url 'fortune:fortune-normal' %}">synchronously</a></li>
 	<li><a href="{% url 'fortune:fortune-websocket' %}">asynchronously (websockets)</a></li>
 </ul>
+
+<h3>Other (coming) options:</h3>
+<ul>
+	<li>send fortune to websocket (from our database)</li>
+	<li>receive fortune from RabbitMQ and send to websocket</li>
+	<li>subscribe to fortune publisher and send to websocket</li>
+</ul>
 {% endblock %}
