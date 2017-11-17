@@ -15,7 +15,7 @@ channel = connection.channel()
 # to particular queue or many queues), those rules are defined by the exchange type.
 # (Available exchange types: 'direct', 'topic', 'headers' and 'fanout'.)
 channel.exchange_declare(exchange='direct_logs', # Define name of exchange.
-                         exchange_type='direct') # This type broadcasts a message to the
+                         exchange_type='direct') # This type broadcasts a message to all
                                                  # queues whose binding key (routing_key
                                                  # in channel.queue_bind()) exactly
                                                  # matches the routing key of the message.
@@ -24,7 +24,7 @@ channel.exchange_declare(exchange='direct_logs', # Define name of exchange.
 # To simplify things we will assume that severity can be one of 'info', 'warning', 'error'.
 severity = sys.argv[1] if len(sys.argv) > 2 else 'info'
 # Get or set message (specify message through
-# '$ python emit_log_direct.py log_severity your_log').
+# '$ python emit_log_direct.py <severity> <your_log>').
 message = ' '.join(sys.argv[2:]) or 'Hello World!'
 # Sending message to exchange.
 channel.basic_publish(exchange='direct_logs', # Specify which exchange will get the message.

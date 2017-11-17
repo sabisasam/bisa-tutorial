@@ -15,7 +15,7 @@ channel = connection.channel()
 # to particular queue or many queues), those rules are defined by the exchange type.
 # (Available exchange types: 'direct', 'topic', 'headers' and 'fanout'.)
 channel.exchange_declare(exchange='direct_logs', # Define name of exchange.
-                         exchange_type='direct') # This type broadcasts a message to the
+                         exchange_type='direct') # This type broadcasts a message to all
                                                  # queues whose binding key (routing_key
                                                  # in channel.queue_bind()) exactly
                                                  # matches the routing key of the message.
@@ -26,15 +26,15 @@ channel.exchange_declare(exchange='direct_logs', # Define name of exchange.
 result = channel.queue_declare(exclusive=True)
 queue_name = result.method.queue # Get the random queue name.
 
-# Get severities in which the consumer should be interested in.
-# Specify those severities through e.g. '$ python receive_logs_direct.py warning error'.
+# Get severities (the consumer will only get logs of this severities).
+# Specify those severities through '$ python receive_logs_direct.py [info] [warning] [error]'.
 # To simplify things we will assume that the severities are 'info', 'warning', 'error'.
 severities = sys.argv[1:]
 if not severities:
     sys.stderr.write("Usage: %s [info] [warning] [error]\n" % sys.argv[0])
     sys.exit(1)
 
-# Create binding for each severity the queue is interested in (bind exchange and queue).
+# Create binding for each given severity (bind exchange and queue).
 for severity in severities:
     channel.queue_bind(exchange='direct_logs', # Exchange which receives the messages.
                        queue=queue_name, # Queue to which the exchange should append messages.
@@ -43,11 +43,12 @@ for severity in severities:
                                              # ('fanout' exchanges simply ignore this value.)
 print(' [*] Waiting for logs. To exit press CTRL+C (Unix) or CTRL+BREAK (Windows).')
 
+# Declaring a callback for 'basic_consume'.
 # Gets called when a message is received.
 def callback(ch, method, properties, body):
     print(" [x] %r: %r" % (method.routing_key, body))
 
-# Specify which function should receive messages from which queue.
+# Specify which function should receive messages from which queue (subscribing to queue).
 channel.basic_consume(callback,
                       queue=queue_name,
                       no_ack=True) # Turn off message acknowledgments.

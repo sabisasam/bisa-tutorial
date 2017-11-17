@@ -12,11 +12,12 @@ channel = connection.channel()
 # Show existing queues and how many messages are in them with '$ rabbitmqctl list_queues'.
 channel.queue_declare(queue='hello')
 
+# Declaring a callback for 'basic_consume'.
 # Gets called when a message is received.
 def callback(ch, method, properties, body):
     print(" [x] Received %r" % body)
 
-# Specify which function should receive messages from which queue.
+# Specify which function should receive messages from which queue (subscribing to queue).
 channel.basic_consume(callback,
                       queue='hello',
                       no_ack=True) # Turn off message acknowledgments.

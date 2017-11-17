@@ -15,6 +15,7 @@ channel = connection.channel()
 channel.queue_declare(queue='task_queue', durable=True)
 print(' [*] Waiting for messages. To exit press CTRL+C (Unix) or CTRL+BREAK (Windows).')
 
+# Declaring a callback for 'basic_consume'.
 # Gets called when a message is received.
 def callback(ch, method, properties, body):
     print(" [x] Received %r" % body)
@@ -28,7 +29,7 @@ def callback(ch, method, properties, body):
 # A worker is busy until it has processed and acknowledged its currently assigned message.
 # (Default behaviour: sends each message to next consumer in sequence (round-robin).)
 channel.basic_qos(prefetch_count=1)
-# Specify which function should receive messages from which queue.
+# Specify which function should receive messages from which queue (subscribing to queue).
 # Default: message achnowledgments are turned on (important: don't forget basic_ack!).
 channel.basic_consume(callback,
                       queue='task_queue')

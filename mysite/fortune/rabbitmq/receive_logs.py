@@ -28,11 +28,12 @@ channel.queue_bind(exchange='logs', # Exchange which receives the messages.
                    queue=queue_name) # Queue to which the exchange should append messages.
 print(' [*] Waiting for logs. To exit press CTRL+C (Unix) or CTRL+BREAK (Windows).')
 
+# Declaring a callback for 'basic_consume'.
 # Gets called when a message is received.
 def callback(ch, method, properties, body):
     print(" [x] %r" % body)
 
-# Specify which function should receive messages from which queue.
+# Specify which function should receive messages from which queue (subscribing to queue).
 channel.basic_consume(callback,
                       queue=queue_name,
                       no_ack=True) # Turn off message acknowledgments.

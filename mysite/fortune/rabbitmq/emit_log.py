@@ -18,7 +18,7 @@ channel.exchange_declare(exchange='logs', # Define name of exchange.
                          exchange_type='fanout') # This type broadcasts all received
                                                  # messages to all queues it knows.
 
-# Get or set message (specify message through '$ python emit_log.py your_log').
+# Get or set message (specify message through '$ python emit_log.py <your_log>').
 message = ' '.join(sys.argv[1:]) or "info: Hello World!"
 # Sending message to exchange.
 channel.basic_publish(exchange='logs', # Specify which exchange will get the message.
