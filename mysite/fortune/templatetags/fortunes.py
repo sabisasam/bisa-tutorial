@@ -18,5 +18,6 @@ def fortune(pack):
 
 @register.simple_tag
 def fortune():
-    """ """
+    """
+    """
     return Fortune.fortune()

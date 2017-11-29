@@ -14,6 +14,12 @@ chat_websocket = [
 ]
 
 
+fortune_websocket = [
+	route("websocket.connect", fortune.ws_connect),
+	route("websocket.disconnect", fortune.ws_disconnect),
+]
+
+
 polls_websocket = [
 	route("websocket.connect", polls.ws_connect),
 	route("websocket.disconnect", polls.ws_disconnect),
@@ -22,6 +28,7 @@ polls_websocket = [
 
 channel_routing = [
 	include(chat_websocket, path=r'^/chat/(?P<room_name>[a-zA-Z0-9_]+)/$'),
+	include(fortune_websocket, path=r'^/fortune/rabbitmq/$'),
 	include(polls_websocket, path=r'^/management/signals/$'),
 	route_class(fortune.Demultiplexer, path=r'/fortune/websocket/$'),
 	route_class(polls.Demultiplexer, path=r'/management/binding/$')

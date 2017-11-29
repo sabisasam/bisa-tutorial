@@ -13,7 +13,7 @@ def index(request):
     return render(request, 'fortune/index.html')
 
 
-def loadFortunePacks():
+def load_fortune_packs():
     packs = get_available_pack_names()
     packs = [pack for pack in packs if not pack.endswith('.dat') and not pack.endswith('.pdat')]
     for pack in packs:
@@ -25,21 +25,21 @@ def loadFortunePacks():
             pass
 
 
-def fortuneNormal(request):
+def fortune_normal(request):
     """
     Belongs to "Fortune Page - Normal" which shows a quote, a
     saying or something similar.
     """
-    loadFortunePacks()
+    load_fortune_packs()
     return render(request, 'fortune/fortune.normal.html')
 
 
 class LoadFortunePacksThread(threading.Thread):
     def run(self):
-        loadFortunePacks()
+        load_fortune_packs()
 
 
-def fortuneWebsocket(request):
+def fortune_websocket(request):
     """
     Belongs to "Fortune Page - Websocket" which shows a quote,
     a saying or something similar and works with websockets.
@@ -51,3 +51,11 @@ def fortuneWebsocket(request):
         if not str(pack_path).endswith('.dat') and not str(pack_path).endswith('.pdat'):
             num_packs += 1
     return render(request, 'fortune/fortune.websocket.html', {'num_packs': num_packs})
+
+
+def fortune_rabbitmq(request):
+    """
+    Belongs to "Fortune Page - RabbitMQ" which can get and
+    show a fortune that was sent by a client.
+    """
+    return render(request, 'fortune/fortune.rabbitmq.html')
