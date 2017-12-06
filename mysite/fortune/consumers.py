@@ -1,7 +1,12 @@
+import json
+import pika
+import threading
+
 from channels import Group
 from channels.generic.websockets import WebsocketDemultiplexer
 
 from .binding import CategoryBinding
+from .models import Fortune
 
 
 # belongs to Fortune Page - Websocket
@@ -16,14 +21,61 @@ class Demultiplexer(WebsocketDemultiplexer):
 
 
 # belongs to Fortune Page - RabbitMQ
+def callback(ch, method, properties, body):
+    category = body.decode('utf-8')
+    print(" [.] Received message.")
+    if category == 'all':
+        fortune = Fortune.fortune()
+    else:
+        fortune = Fortune.fortune() # Fortune.fortune(category) has not been implemented yet
+    Group('fortunes-mq').send({
+        'text': json.dumps({
+            'fortune': fortune
+        })
+    })
+    print(" [.] Sent fortune of category %r to websocket.\n [x] Continue awaiting messages..." % category)
+
+
+# belongs to Fortune Page - RabbitMQ
+def rabbitmq_receive():
+    # (Connect to a broker on a different machine by specifying its name or IP address here.)
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    channel = connection.channel()
+
+    channel.exchange_declare(exchange='logs',
+                             exchange_type='fanout')
+
+    result = channel.queue_declare(exclusive=True)
+    queue_name = result.method.queue
+
+    channel.queue_bind(exchange='logs',
+                       queue=queue_name)
+    print(' [x] Waiting for messages...')
+
+    channel.basic_consume(callback,
+                          queue=queue_name,
+                          no_ack=True)
+
+    channel.start_consuming()
+
+
+# belongs to Fortune Page - RabbitMQ
+class RunRabbitmqReceive(threading.Thread):
+    started = False
+    def run(self):
+        rabbitmq_receive()
+
+
+# belongs to Fortune Page - RabbitMQ
 def ws_connect(message):
-    # add to the fortunes-mq group
     Group("fortunes-mq").add(message.reply_channel)
-    # create instance of FortuneServer
     message.reply_channel.send({"accept": True})
+
+    if RunRabbitmqReceive.started == False:
+        RunRabbitmqReceive().start()
+        RunRabbitmqReceive.started = True
 
 
 # belongs to Fortune Page - RabbitMQ
 def ws_disconnect(message):
-    # remove from fortunes-mq group
     Group("fortunes-mq").discard(message.reply_channel)

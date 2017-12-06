@@ -16,7 +16,7 @@
     }
     socket.onmessage = function message(event) {
         var data = JSON.parse(event.data);
-        var fortune = data.payload.fortune;
+        var fortune = data.fortune;
         console.log("Received a fortune.");
         $('pre').replaceWith('<pre>' + fortune + '</pre>');
     };
