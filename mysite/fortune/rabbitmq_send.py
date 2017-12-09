@@ -1,4 +1,5 @@
 # Usage: type in the command $ python rabbitmq_send.py <category>
+import json
 import pika
 import sys
 
@@ -11,9 +12,10 @@ channel.exchange_declare(exchange='logs',
                          exchange_type='fanout')
 
 category = ' '.join(sys.argv[1:]) or "all"
+message = json.dumps({ 'category': category })
 channel.basic_publish(exchange='logs',
                       routing_key='',
-                      body=category)
+                      body=message)
 print(" [x] Sent category %r" % category)
 
 connection.close()

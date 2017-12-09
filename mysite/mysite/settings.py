@@ -89,13 +89,6 @@ CHANNEL_LAYERS = {
             "hosts": [("localhost", 6379)],
         },
     },
-    "rabbitmq": {
-        "BACKEND": "asgi_rabbitmq.RabbitmqChannelLayer",
-        "ROUTING": "mysite.routing.channel_routing",
-        "CONFIG": {
-            "url": "amqp://guest:guest@localhost:5672/%2F",
-        },
-    },
 }
 
 # Database

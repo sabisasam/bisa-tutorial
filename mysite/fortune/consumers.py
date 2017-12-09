@@ -22,16 +22,11 @@ class Demultiplexer(WebsocketDemultiplexer):
 
 # belongs to Fortune Page - RabbitMQ
 def callback(ch, method, properties, body):
-    category = body.decode('utf-8')
+    category = json.loads(body)['category']
     print(" [.] Received message.")
-    if category == 'all':
-        fortune = Fortune.fortune()
-    else:
-        fortune = Fortune.fortune() # Fortune.fortune(category) has not been implemented yet
+    fortune = Fortune.fortune(category)
     Group('fortunes-mq').send({
-        'text': json.dumps({
-            'fortune': fortune
-        })
+        'text': json.dumps({ 'fortune': fortune })
     })
     print(" [.] Sent fortune of category %r to websocket.\n [x] Continue awaiting messages..." % category)
 

@@ -14,7 +14,7 @@ else:
 
 def get_fortunes_path():
     """
-    Return the path to the fortunes data packs.
+    Returns the path to the fortunes data packs.
     """
     app_config = apps.get_app_config("fortune")
     return Path(os.sep.join([app_config.path, "cookies"]))
@@ -22,7 +22,7 @@ def get_fortunes_path():
 
 def get_available_pack_names():
     """
-    Return a list of (lower-cased) names if available (unloaded) packs.
+    Returns a list of (lower-cased) names of available (unloaded) packs.
     """
     installed_pack_names = [pack.category.lower() for pack in Category.objects.all()]
     fortunes_path = get_fortunes_path()
@@ -46,13 +46,16 @@ class UnavailablePackError(Exception):
 
 
 class Category(models.Model):
-    """ """
+    """
+    Category class to store our fortune categories.
+    """
     category = models.CharField(max_length=100, default="default", unique=True)
 
     @classmethod
     def load(cls, pack_name):
         """
-        Load a package into a category. This function is from django-fortune.
+        Creates category with given pack name and loads fortunes of that
+        pack into Fortune. This function is from django-fortune.
         """
         if pack_name.lower() not in get_available_pack_names():
             raise UnavailablePackError
@@ -78,7 +81,7 @@ class Category(models.Model):
 
 class Fortune(models.Model):
     """
-    Fortune class to store our random fortunes.
+    Fortune class to store our fortunes.
     """
     category = models.ForeignKey(
         Category,
@@ -94,9 +97,19 @@ class Fortune(models.Model):
         return self.text
 
     @classmethod
-    def fortune(cls):
-        """ """
-        fortune_ids = cls.objects.values_list('id', flat=True)
+    def fortune(cls, category=''):
+        """
+        Returns a random fortune. If an existing category is given, the
+        fortune will be of that category.
+        """
+        installed_pack_names = [pack.category.lower() for pack in Category.objects.all()]
+
+        if category.lower() in installed_pack_names:
+            category_obj = Category.objects.get(category=category.lower())
+            fortune_ids = cls.objects.filter(category=category_obj).values_list('id', flat=True)
+        else:
+            fortune_ids = cls.objects.values_list('id', flat=True)
+
         if fortune_ids.exists():
             random_id = random.sample(list(fortune_ids), 1)
             fortune = cls.objects.get(id=random_id[0])
