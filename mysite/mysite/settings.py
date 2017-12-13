@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,13 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z9-2#=h^v#^!3z3c^4u_gon7403p!eoea94feumg4_6ca14$z^'
-GITHUB_WEBHOOK_KEY = 'vkBELdHR9DDC7hF3MYpfFKpFsEF7UYUzmEWpNe4at04sMkfkXT'
+SECRET_KEY = config('SECRET_KEY')
+GITHUB_WEBHOOK_KEY = config('GITHUB_WEBHOOK_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['finnerds.com']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
 
-    'channels',
+    # 'channels',
     'django_extensions',
 ]
 
