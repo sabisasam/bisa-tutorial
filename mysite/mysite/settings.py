@@ -21,11 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'z9-2#=h^v#^!3z3c^4u_gon7403p!eoea94feumg4_6ca14$z^'
+GITHUB_WEBHOOK_KEY = 'vkBELdHR9DDC7hF3MYpfFKpFsEF7UYUzmEWpNe4at04sMkfkXT'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['finnerds.com']
 
 
 # Application definition
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'fortune.apps.FortuneConfig',
     'polls.apps.PollsConfig',
+    'webhook.apps.WebhookConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
