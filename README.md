@@ -315,9 +315,15 @@ So those templates got changed to handle messages in one of those ways.
 The Fortune Pages show a random quote, saying or something similar.
 The normal version of the page loads as long as fortune packs get loaded
 while the websocket version loads the packs in the background and updates the page afterwards.
-If you run the script rabbitmq_send.py it will send a message (optional with a category)
-through RabbitMQ to a consumer which will send a fortune (of given category)
-to the websocket of the RabbitMQ version of the Fortune Page
-and the text on that page will be replaced by that fortune.
+If you run the script rabbitmq_send.py it will send a message (optional with a category) through RabbitMQ to a consumer.
+Then, this consumer will send a fortune (of given category) to the websocket of the RabbitMQ version of the Fortune Page.
+This websocket will then replace the text on that page with the sent fortune.
 
 The rabbitmq folder contains the results of doing the RabbitMQ tutorial for Python.
+
+
+
+## 20) Webhooks
+
+The webhook got created through doing the steps described on [this page](https://simpleisbetterthancomplex.com/tutorial/2016/10/31/how-to-handle-github-webhooks-using-django.html).
+If the right secret token is used, the webhook reacts to GitHub's POST requests by e.g. sending "pong".
