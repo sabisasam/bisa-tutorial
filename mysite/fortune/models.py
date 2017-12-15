@@ -31,6 +31,8 @@ def get_available_pack_names():
             pass
         elif path.suffix == ".dat":
             pass
+        elif path.suffix == ".pdat":
+            pass
         elif path.name.lower() in installed_pack_names:
             pass
         else:
@@ -38,6 +40,10 @@ def get_available_pack_names():
 
 
 class PackAlreadyLoadedError(Exception):
+    pass
+
+
+class CategoryAlreadyUnloadedError(Exception):
     pass
 
 
@@ -57,6 +63,8 @@ class Category(models.Model):
         Creates category with given pack name and loads fortunes of that
         pack into Fortune. This function is from django-fortune.
         """
+        if pack_name.lower() in [pack.category.lower() for pack in Category.objects.all()]:
+            raise PackAlreadyLoadedError
         if pack_name.lower() not in get_available_pack_names():
             raise UnavailablePackError
         fortunes_path = get_fortunes_path()
@@ -73,7 +81,10 @@ class Category(models.Model):
                         Fortune.objects.create(text=fortune, category=pack)
 
     def unload(self):
-        self.delete()
+        try:
+            self.delete()
+        except AssertionError:
+            raise CategoryAlreadyUnloadedError
 
     def __str__(self):
         return self.category

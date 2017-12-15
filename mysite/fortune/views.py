@@ -15,7 +15,6 @@ def index(request):
 
 def load_fortune_packs():
     packs = get_available_pack_names()
-    packs = [pack for pack in packs if not pack.endswith('.dat') and not pack.endswith('.pdat')]
     for pack in packs:
         try:
             Category.load(pack)
