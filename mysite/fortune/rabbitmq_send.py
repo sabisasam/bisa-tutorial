@@ -11,11 +11,14 @@ channel = connection.channel()
 channel.exchange_declare(exchange='logs',
                          exchange_type='fanout')
 
-category = ' '.join(sys.argv[1:]) or "all"
+category = ' '.join(sys.argv[1:]) or ''
 message = json.dumps({ 'category': category })
 channel.basic_publish(exchange='logs',
                       routing_key='',
                       body=message)
-print(" [x] Sent category %r" % category)
+if category == '':
+	print(" [x] Sent no specific category")
+else:
+	print(" [x] Sent category %r" % category)
 
 connection.close()
