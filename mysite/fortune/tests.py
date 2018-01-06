@@ -1,15 +1,20 @@
 import html
 
+from channels.test import ChannelTestCase, WSClient
 from django.test import TestCase
 from django.urls import reverse
 
 from .models import (get_available_pack_names, Category, Fortune, UnavailablePackError,
                      PackAlreadyLoadedError, CategoryAlreadyUnloadedError)
+from .views import load_fortune_packs
 
 
-def create_sample_category_and_fortune():
-    category = Category.objects.create(category='cat')
-    fortune = Fortune.objects.create(text='Meow!', category=category)
+def create_sample_category_and_fortune(cat='cat', text='Meow!'):
+    """
+    Creates a sample category and a sample fortune for that category.
+    """
+    category = Category.objects.create(category=cat)
+    fortune = Fortune.objects.create(text=text, category=category)
     return category, fortune
 
 
@@ -18,11 +23,17 @@ class CategoryModelTests(TestCase):
     Contains tests for Category model.
     """
 
-    def test_load_with_unavailable_pack(self):
+    def test_load_with_nonexistent_pack(self):
         """
         Function load raises UnavailablePackError for nonexistent packs.
         """
         self.assertRaises(UnavailablePackError, Category.load, '')
+
+    def test_load_with_unknown_pack(self):
+        """
+        Function load raises UnavailablePackError for unknown packs.
+        """
+        self.assertRaises(UnavailablePackError, Category.load, 'UNKNOWN_PACK')
 
     def test_load_with_already_loaded_pack(self):
         """
@@ -80,28 +91,30 @@ class FortuneModelTests(TestCase):
         """
         Function fortune returns the text of an existing, random fortune.
         """
-        create_sample_category_and_fortune()
-        self.assertEqual(Fortune.fortune(), 'Meow!')
+        fortune = create_sample_category_and_fortune()[1]
+        self.assertEqual(Fortune.fortune(), fortune.text)
 
     def test_fortune_with_unavailable_category(self):
         """
-        Function fortune returns the text of an existing, random fortune of no
-        specific category (can be any category).
+        Function fortune returns the text of an existing, random fortune of an
+        existing category (can be any existing category).
         """
         category = create_sample_category_and_fortune()[0]
         fortune = Fortune.fortune('dog')
         fortune_obj = Fortune.objects.get(text=fortune)
         self.assertNotEqual(fortune_obj.category.category, 'dog')
+        self.assertEqual(fortune_obj.category.category, category.category)
 
     def test_fortune_with_available_category(self):
         """
         Function fortune returns the text of an existing, random fortune of the
         given category.
         """
-        category = create_sample_category_and_fortune()[0]
+        create_sample_category_and_fortune()
+        create_sample_category_and_fortune(cat='dog', text='Woof!')
         fortune = Fortune.fortune('dog')
         fortune_obj = Fortune.objects.get(text=fortune)
-        self.assertNotEqual(fortune_obj.category.category, 'dog')
+        self.assertEqual(fortune_obj.category.category, 'dog')
 
 
 def get_fortune_from_response(response):
@@ -134,7 +147,7 @@ class FortuneIndexViewTests(TestCase):
         """
         An existing fortune is displayed on the index page.
         """
-        category, fortune = create_sample_category_and_fortune()
+        fortune = create_sample_category_and_fortune()[1]
         response = self.client.get(reverse('fortune:index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, fortune.text)
@@ -182,6 +195,8 @@ class FortuneNormalViewTests(TestCase):
         packs = list(get_available_pack_names())
         for pack in packs:
             Category.load(pack)
+        remaining_packs = list(get_available_pack_names())
+        self.assertEqual(remaining_packs, [])
         response = self.client.get(reverse('fortune:fortune-normal'))
         categories = [pack.category.lower() for pack in Category.objects.all()]
         self.assertEqual(categories, packs)
@@ -189,35 +204,62 @@ class FortuneNormalViewTests(TestCase):
         self.assertIs(type(Fortune.objects.get(text=fortune)), Fortune)
 
 
-class FortuneWebsocketTests(TestCase):
+class FortuneWebsocketTests(ChannelTestCase):
     """
     Contains tests for fortune_websocket view.
     """
 
     def test_no_packs_loaded(self):
         """
-        If all packs aren't loaded yet, then visiting the page will cause loading
-        all packs in the background. Meanwhile the message "Fortunes are not
-        loaded, yet." is displayed on the page. After all packs are loaded, the
-        message will be replaced by an existing fortune.
+        If no pack got loaded yet, then visiting the page will cause loading all
+        packs in the background through running load_fortune_packs as thread.
+        For every created category, a message containing the category's ID will
+        be sent to the fortune-ws channels group.
         """
+        packs = list(get_available_pack_names())
+        client = WSClient()
+        client.join_group('fortune-ws')
+        load_fortune_packs()
+        # See if all packs got loaded.
+        self.assertEqual(Category.objects.count(), len(packs))
+        # See if client received messages for created categories.
+        result = client.receive()
+        id_of_created_category = result['payload']['pk']
+        self.assertIs(type(Category.objects.get(pk=id_of_created_category)), Category)
 
     def test_some_packs_loaded(self):
         """
         If just some packs are loaded, then visiting the page will cause loading
-        all not yet loaded packs in the background. The page will display an
-        existing fortune while loading those packs and won't change it after
-        finishing loading.
+        all remaining packs in the background through running load_fortune_packs
+        as thread. For every created category, a message containing the ID of
+        that category will be sent to the fortune-ws channels group.
         """
+        packs = list(get_available_pack_names())
+        Category.load(packs[0])
+        client = WSClient()
+        client.join_group('fortune-ws')
+        load_fortune_packs()
+        # See if all remaining packs got loaded.
+        self.assertEqual(Category.objects.count(), len(packs))
+        # See if client received messages for created categories.
+        result = client.receive()
+        id_of_created_category = result['payload']['pk']
+        self.assertIs(type(Category.objects.get(pk=id_of_created_category)), Category)
 
     def test_all_packs_loaded(self):
         """
         If all packs are loaded, then visiting the page won't cause loading any
-        packs. An existing, random fortune will be displayed.
+        packs through running load_fortune_packs as thread. Therefore, no message
+        will be sent to the fortune-ws channels group.
         """
-
-
-class FortuneRabbitmqTests(TestCase):
-    """
-    Contains tests for fortune_rabbitmq view.
-    """
+        packs = list(get_available_pack_names())
+        for pack in packs:
+            Category.load(pack)
+        self.assertEqual(Category.objects.count(), len(packs))
+        client = WSClient()
+        client.join_group('fortune-ws')
+        load_fortune_packs()
+        # See if the number of Category objects stays the same.
+        self.assertEqual(Category.objects.count(), len(packs))
+        # See if client received messages.
+        self.assertIsNone(client.receive())
