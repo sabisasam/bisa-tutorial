@@ -1,4 +1,4 @@
-# Usage: type in the command $ python rabbitmq_send.py <category>
+# Usage: type in the command $ python rabbitmq_send.py [category]
 import json
 import pika
 import sys

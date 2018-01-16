@@ -29,7 +29,7 @@ class Command(BaseCommand):
             category = path.basename(options['file'])
             category = path.splitext(category)[0]
             self.stdout.write(self.style.WARNING(
-                'Using the name: ' + category +' as name.'))
+                'Using ' + category +' as category name.'))
 
         category = Category.objects.get_or_create(category=category)[0]
 
