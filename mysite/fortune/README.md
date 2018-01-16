@@ -81,7 +81,7 @@ But as you can see, you're able to define a different category name.
 If you want to specify a category name which contains spaces, use double quotes.
 An example:
 
-![import_fortune](/static/fortune/images/import_fortune.jpg)
+![import_fortune](/mysite/fortune/static/fortune/images/import_fortune.jpg)
 
 
 
@@ -124,8 +124,8 @@ write one of the following lines into your console:
 
 E.g. sending a message with "starwars" as category using the first line would look like:
 
-![rabbitmq_send script](/static/fortune/images/rabbitmq_send_script.jpg)
+![rabbitmq_send script](/mysite/fortune/static/fortune/images/rabbitmq_send_script.jpg)
 
 Doing the same using the second line would look like:
 
-![rabbitmq_send command](/static/fortune/images/rabbitmq_send_command.jpg)
+![rabbitmq_send command](/mysite/fortune/static/fortune/images/rabbitmq_send_command.jpg)
