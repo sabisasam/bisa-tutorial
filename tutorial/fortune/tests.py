@@ -211,7 +211,8 @@ class FortuneNormalViewTests(TestCase):
             Category.load(pack)
         remaining_packs = list(get_available_pack_names())
         self.assertEqual(remaining_packs, [])
-        response = self.client.get(reverse('fortune:fortune-normal'))
+        fake_request = ''
+        response = fortune_normal(fake_request)
         categories = [pack.category.lower() for pack in Category.objects.all()]
         self.assertEqual(categories, packs)
         fortune = get_fortune_from_response(response)
