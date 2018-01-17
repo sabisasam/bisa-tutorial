@@ -7,3 +7,5 @@ This directory should contain all static files (CSS, JavaScript, Images), if the
 To collect all static files you use
 
      $ python manage.py collectstatic 
+
+After you collected the files in the new "static_root" directory you may delete this file
