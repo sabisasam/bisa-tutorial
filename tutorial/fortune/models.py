@@ -64,6 +64,7 @@ class Category(models.Model):
         Creates category with given pack name and loads fortunes of that
         pack into Fortune. This function is from django-fortune.
         """
+        import codecs
         if pack_name.lower() in [pack.category.lower()
                                  for pack in Category.objects.all()]:
             raise PackAlreadyLoadedError
@@ -76,7 +77,7 @@ class Category(models.Model):
                 pack = cls.objects.create(category=pack_name)
             except IntegrityError:
                 raise PackAlreadyLoadedError
-            with open(pack_filename, 'r') as pack_file:
+            with codecs.open(pack_filename, 'r', encoding='utf-8', errors='ignore') as pack_file:
                 fortunes = pack_file.read()
                 for fortune in fortunes.split('\n%\n'):
                     if fortune:  # No empty fortunes.
