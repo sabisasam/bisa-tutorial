@@ -107,6 +107,19 @@ To get a fortune text of a specific category, use `{{ "category name" | fortune 
 
 ## 4) RabbitMQ and Channels
 
+If you installed docker, you just need to start redis and rabbitmq within a container and not local.
+
+**Redis**
+
+    $  docker run -p 6379:6379 redis
+
+**RabbitMQ**
+
+    $ docker run -p 4369:4369 -p 5672:5672 -p 15672:15672 -p 25672:25672 --hostname your_rabbit --name your-docker-rabbit -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest rabbitmq:3-management 
+
+The default password needs to be known within the django application and within any job which likes
+to send via RabbiqMQ a text.
+
 Through RabbitMQ, you can receive messages on an exchange of type `fanout`
 which will cause the subscriber in `consumers.py` to send a random fortune text to a Channels group.
 The message can be from outside, it only has to be sent through the same RabbitMQ server to that exchange
