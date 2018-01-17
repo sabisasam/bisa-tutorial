@@ -66,7 +66,7 @@ fi
 
 echo "$prefix collectstatic"
 python manage.py collectstatic --noinput
-python manage.py makemigrations
+python manage.py makemigrations polls chat fortune
 python manage.py migrate
 
 if [ ! $ACCOUNTSKIP ]
