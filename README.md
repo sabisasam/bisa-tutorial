@@ -157,7 +157,10 @@ The consumer ws_connect accepts connection requests.
 The function ws_message deals with messages and ws_disconnect discards a connection.
 Channel routing is contained in polls/routing.py and it maps channels to consumer functions.
 
+To activate "redis" install docker and avoid this way multiple local installations. After the installation
+run your redis or rabbitmq instances like this
 
+     $ docker run -p 6379:6379 redis
 
 ## 15) Management Page
 
