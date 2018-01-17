@@ -24,7 +24,8 @@ def get_available_pack_names():
     """
     Returns a list of (lower-cased) names of available (unloaded) packs.
     """
-    installed_pack_names = [pack.category.lower() for pack in Category.objects.all()]
+    installed_pack_names = [pack.category.lower()
+                            for pack in Category.objects.all()]
     fortunes_path = get_fortunes_path()
     for path in fortunes_path.iterdir():
         if path.is_dir():
@@ -63,7 +64,8 @@ class Category(models.Model):
         Creates category with given pack name and loads fortunes of that
         pack into Fortune. This function is from django-fortune.
         """
-        if pack_name.lower() in [pack.category.lower() for pack in Category.objects.all()]:
+        if pack_name.lower() in [pack.category.lower()
+                                 for pack in Category.objects.all()]:
             raise PackAlreadyLoadedError
         if pack_name.lower() not in get_available_pack_names():
             raise UnavailablePackError
@@ -113,11 +115,14 @@ class Fortune(models.Model):
         Returns a random fortune. If an existing category is given, the
         fortune will be of that category.
         """
-        installed_pack_names = [pack.category.lower() for pack in Category.objects.all()]
+        installed_pack_names = [pack.category.lower()
+                                for pack in Category.objects.all()]
 
         if category.lower() in installed_pack_names:
             category_obj = Category.objects.get(category=category.lower())
-            fortune_ids = cls.objects.filter(category=category_obj).values_list('id', flat=True)
+            fortune_ids = cls.objects.filter(
+                category=category_obj).values_list(
+                'id', flat=True)
         else:
             fortune_ids = cls.objects.values_list('id', flat=True)
 

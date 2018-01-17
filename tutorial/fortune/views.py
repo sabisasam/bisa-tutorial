@@ -47,9 +47,12 @@ def fortune_websocket(request):
     num_packs = 0
     fortune_path = get_fortunes_path()
     for pack_path in fortune_path.iterdir():
-        if not str(pack_path).endswith('.dat') and not str(pack_path).endswith('.pdat'):
+        if not str(pack_path).endswith('.dat') and not str(
+                pack_path).endswith('.pdat'):
             num_packs += 1
-    return render(request, 'fortune/fortune.websocket.html', {'num_packs': num_packs})
+    return render(request,
+                  'fortune/fortune.websocket.html',
+                  {'num_packs': num_packs})
 
 
 def fortune_rabbitmq(request):

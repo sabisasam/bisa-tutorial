@@ -4,8 +4,13 @@ from channels.test import ChannelTestCase, WSClient
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import (get_available_pack_names, Category, Fortune, UnavailablePackError,
-                     PackAlreadyLoadedError, CategoryAlreadyUnloadedError)
+from .models import (
+    get_available_pack_names,
+    Category,
+    Fortune,
+    UnavailablePackError,
+    PackAlreadyLoadedError,
+    CategoryAlreadyUnloadedError)
 from .views import load_fortune_packs
 
 
@@ -40,7 +45,10 @@ class CategoryModelTests(TestCase):
         Function load raises PackAlreadyLoadedError for already loaded packs.
         """
         category = create_sample_category_and_fortune()[0]
-        self.assertRaises(PackAlreadyLoadedError, Category.load, category.category)
+        self.assertRaises(
+            PackAlreadyLoadedError,
+            Category.load,
+            category.category)
 
     def test_load_with_not_yet_loaded_pack(self):
         """
@@ -70,7 +78,11 @@ class CategoryModelTests(TestCase):
         """
         category = create_sample_category_and_fortune()[0]
         category.unload()
-        self.assertEqual(list(Category.objects.filter(category=category.category)), [])
+        self.assertEqual(
+            list(
+                Category.objects.filter(
+                    category=category.category)),
+            [])
         self.assertEqual(list(Fortune.objects.filter(category=category)), [])
 
 
@@ -225,7 +237,11 @@ class FortuneWebsocketTests(ChannelTestCase):
         # See if client received messages for created categories.
         result = client.receive()
         id_of_created_category = result['payload']['pk']
-        self.assertIs(type(Category.objects.get(pk=id_of_created_category)), Category)
+        self.assertIs(
+            type(
+                Category.objects.get(
+                    pk=id_of_created_category)),
+            Category)
 
     def test_some_packs_loaded(self):
         """
@@ -244,7 +260,11 @@ class FortuneWebsocketTests(ChannelTestCase):
         # See if client received messages for created categories.
         result = client.receive()
         id_of_created_category = result['payload']['pk']
-        self.assertIs(type(Category.objects.get(pk=id_of_created_category)), Category)
+        self.assertIs(
+            type(
+                Category.objects.get(
+                    pk=id_of_created_category)),
+            Category)
 
     def test_all_packs_loaded(self):
         """

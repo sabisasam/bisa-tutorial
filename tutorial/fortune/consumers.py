@@ -12,12 +12,12 @@ from .models import Fortune
 # belongs to Fortune Page - Websocket
 class Demultiplexer(WebsocketDemultiplexer):
 
-	consumers = {
-		"fortune": CategoryBinding.consumer,
-	}
+    consumers = {
+        "fortune": CategoryBinding.consumer,
+    }
 
-	def connection_groups(self):
-		return ["fortune-ws"]
+    def connection_groups(self):
+        return ["fortune-ws"]
 
 
 # belongs to Fortune Page - RabbitMQ
@@ -26,15 +26,18 @@ def callback(ch, method, properties, body):
     print(" [.] Received message.")
     fortune = Fortune.fortune(category)
     Group('fortunes-mq').send({
-        'text': json.dumps({ 'fortune': fortune })
+        'text': json.dumps({'fortune': fortune})
     })
-    print(" [.] Sent fortune of category %r to websocket.\n [x] Continue awaiting messages..." % category)
+    print(
+        " [.] Sent fortune of category %r to websocket.\n [x] Continue awaiting messages..." %
+        category)
 
 
 # belongs to Fortune Page - RabbitMQ
 def rabbitmq_receive():
     # (Connect to a broker on a different machine by specifying its name or IP address here.)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
 
     channel.exchange_declare(exchange='logs',
@@ -57,6 +60,7 @@ def rabbitmq_receive():
 # belongs to Fortune Page - RabbitMQ
 class RunRabbitmqReceive(threading.Thread):
     started = False
+
     def run(self):
         rabbitmq_receive()
 
@@ -66,7 +70,7 @@ def ws_connect(message):
     Group("fortunes-mq").add(message.reply_channel)
     message.reply_channel.send({"accept": True})
 
-    if RunRabbitmqReceive.started == False:
+    if not RunRabbitmqReceive.started:
         RunRabbitmqReceive().start()
         RunRabbitmqReceive.started = True
 
