@@ -5,9 +5,13 @@ import sys
 
 
 # (Connect to a broker on a different machine by specifying its name or IP address here.)
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(
-        host='localhost'))
+credentials = pika.PlainCredentials('guest', 'guest')
+parameter = parameters = pika.ConnectionParameters('localhost',
+                                       5672,
+                                       '/',
+                                       credentials)
+
+connection = pika.BlockingConnection(parameter)
 channel = connection.channel()
 
 channel.exchange_declare(exchange='logs',
