@@ -1,0 +1,33 @@
+{% extends "fortune/base.html" %}
+{% load fortunes static %}
+
+{% block title %}Fortune Page - Websocket{% endblock %}
+
+{% block content %}
+<pre>{% fortune %}</pre>
+{% endblock %}
+
+{% block script %}
+<script src="{% static '/fortune/js/jquery-3.2.1.min.js' %}"></script>
+<script>
+	var socket = new WebSocket("ws://" + window.location.host + "/fortune/websocket/");
+	var num_packs = "{{ num_packs }}";
+	socket.onopen = function open() {
+		console.log("Created WebSocket connection.");
+	}
+	socket.onmessage = function message(event) {
+		var data = JSON.parse(event.data);
+		var id = data.payload.pk;
+		if (id >= num_packs) {
+			if ($('pre').text().includes("Fortunes are not loaded, yet.")) {
+				$('pre').load(window.location.href + " pre", function() {
+					$(this).children().first().unwrap();
+				});
+			};
+		};
+	};
+	if (socket.readyState == WebSocket.OPEN) {
+		socket.onopen();
+	}
+</script>
+{% endblock %}

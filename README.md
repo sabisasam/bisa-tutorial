@@ -157,7 +157,10 @@ The consumer ws_connect accepts connection requests.
 The function ws_message deals with messages and ws_disconnect discards a connection.
 Channel routing is contained in polls/routing.py and it maps channels to consumer functions.
 
+To activate "redis" install docker and avoid this way multiple local installations. After the installation
+run your redis or rabbitmq instances like this
 
+     $ docker run -p 6379:6379 redis
 
 ## 15) Management Page
 
@@ -315,3 +318,9 @@ So those templates got changed to handle messages in one of those ways.
 The Fortune Pages show a random quote, saying or something similar.
 The normal version of the page loads as long as fortune packs get loaded
 while the websocket version loads the packs in the background and updates the page afterwards.
+If you run the script rabbitmq_send.py it will send a message (optional with a category)
+through RabbitMQ to a consumer which will send a fortune (of given category)
+to the websocket of the RabbitMQ version of the Fortune Page
+and the text on that page will be replaced by that fortune.
+
+The rabbitmq folder contains the results of doing the RabbitMQ tutorial for Python.
