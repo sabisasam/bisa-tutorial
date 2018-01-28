@@ -2,7 +2,8 @@ import threading
 
 from django.shortcuts import render
 
-from .models import Category, get_available_pack_names, get_fortunes_path, PackAlreadyLoadedError, UnavailablePackError
+from .models import (Category, Fortune, get_available_pack_names, get_fortunes_path,
+                     PackAlreadyLoadedError, UnavailablePackError)
 
 
 def index(request):
@@ -10,7 +11,8 @@ def index(request):
     Belongs to "Fortune Page - Overview" which lists links to
     different versions of the Fortune Page.
     """
-    return render(request, 'fortune/index.html')
+    categories = [pack.category.lower() for pack in Category.objects.all()]
+    return render(request, 'fortune/index.html', {'categories': categories})
 
 
 def load_fortune_packs():
@@ -61,3 +63,17 @@ def fortune_rabbitmq(request):
     show a fortune that was sent by a client.
     """
     return render(request, 'fortune/fortune.rabbitmq.html')
+
+
+def fortune_category(request, category):
+    """
+    Belongs to "Fortune Page - Category" which shows a fortune
+    of the given category.
+    """
+    fortune = Fortune.fortune(category)
+    if category not in [pack.category.lower() for pack in Category.objects.all()]:
+        category = 'all'
+    return render(request, 'fortune/fortune.category.html', {
+        'category': category,
+        'fortune': fortune,
+    })

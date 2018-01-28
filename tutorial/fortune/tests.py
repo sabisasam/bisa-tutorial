@@ -11,7 +11,7 @@ from .models import (
     UnavailablePackError,
     PackAlreadyLoadedError,
     CategoryAlreadyUnloadedError)
-from .views import load_fortune_packs
+from .views import fortune_normal, load_fortune_packs
 
 
 def create_sample_category_and_fortune(cat='cat', text='Meow!'):
@@ -176,7 +176,8 @@ class FortuneNormalViewTests(TestCase):
         all packs. After that, an existing fortune will be displayed.
         """
         packs = list(get_available_pack_names())
-        response = self.client.get(reverse('fortune:fortune-normal'))
+        fake_request = ''
+        response = fortune_normal(fake_request)
         categories = [pack.category.lower() for pack in Category.objects.all()]
         self.assertEqual(categories, packs)
         packs = list(get_available_pack_names())
@@ -191,7 +192,8 @@ class FortuneNormalViewTests(TestCase):
         """
         packs = list(get_available_pack_names())
         Category.load(packs[0])
-        response = self.client.get(reverse('fortune:fortune-normal'))
+        fake_request = ''
+        response = fortune_normal(fake_request)
         categories = [pack.category.lower() for pack in Category.objects.all()]
         self.assertEqual(categories, packs)
         packs = list(get_available_pack_names())
@@ -209,7 +211,8 @@ class FortuneNormalViewTests(TestCase):
             Category.load(pack)
         remaining_packs = list(get_available_pack_names())
         self.assertEqual(remaining_packs, [])
-        response = self.client.get(reverse('fortune:fortune-normal'))
+        fake_request = ''
+        response = fortune_normal(fake_request)
         categories = [pack.category.lower() for pack in Category.objects.all()]
         self.assertEqual(categories, packs)
         fortune = get_fortune_from_response(response)

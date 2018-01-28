@@ -4,8 +4,15 @@ channels==1.1.8
 daphne==1.4.2
 Django==2.0.1
 django-extensions==1.9.9
+flake8==3.5.0
+pathlib2==2.3.0
+pika==0.11.0
 python-decouple==3.1
 redis==2.10.6
+requests==2.18.4
 yolk3k==0.9
+<<<<<<< HEAD
 flake8==3.5.0
+=======
+>>>>>>> 1638c8ff20c927d805c33178c0b013d826214674
 pika
