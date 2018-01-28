@@ -36,8 +36,11 @@ def callback(ch, method, properties, body):
 # belongs to Fortune Page - RabbitMQ
 def rabbitmq_receive():
     # (Connect to a broker on a different machine by specifying its name or IP address here.)
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost'))
+    credentials = pika.PlainCredentials('guest', 'guest')
+    connection = pika.ConnectionParameters('localhost',
+                                       5672,
+                                       '/',
+                                       credentials)
     channel = connection.channel()
 
     channel.exchange_declare(exchange='logs',
