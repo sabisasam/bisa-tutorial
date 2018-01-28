@@ -11,3 +11,4 @@ python-decouple==3.1
 redis==2.10.6
 requests==2.18.4
 yolk3k==0.9
+pika
