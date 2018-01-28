@@ -11,8 +11,6 @@ python-decouple==3.1
 redis==2.10.6
 requests==2.18.4
 yolk3k==0.9
-<<<<<<< HEAD
 flake8==3.5.0
-=======
->>>>>>> 1638c8ff20c927d805c33178c0b013d826214674
-pika
+pika==0.11.2
+requests==2.18.4
