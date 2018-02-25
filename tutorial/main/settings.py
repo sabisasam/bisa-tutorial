@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'fortune.apps.FortuneConfig',
     'polls.apps.PollsConfig',
+    'rest.apps.RestConfig',
     'webhook.apps.WebhookConfig',
 
     'django.contrib.admin',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
     'channels',
     'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
