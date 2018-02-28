@@ -34,7 +34,7 @@ print(repr(serializer))
 
 
 
-## 2) Requests and Responses
+## 2) Requests & Responses
 
 REST framework introduces a `Request` object that extends the regular `HttpRequest`,
 and provides more flexible request parsing.
@@ -72,3 +72,19 @@ by adding a `format` keyword argument to the views
 and appending a set of `format_suffix_patterns` in addition to the URLs.
 Using format suffixes gives us URLs that explicitly refer to a given format,
 and means our API will be able to handle URLs such as <http://example.com/api/items/4.json>.
+
+
+
+## 3) Class-based Views
+
+We can write our API views using class-based views which is a powerful pattern
+that allows us to reuse common functionality and helps us keep our code DRY
+([**D**on't **R**epeat **Y**ourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself)).
+
+One of the big wins of using class-based views is that it allows us
+to easily compose reusable bits of behaviour (e.g. create/retrieve/update/delete operations).
+Those bits of common behaviour are implemented in REST framework's mixin classes
+which slightly reduce the code, but we can go one step further.
+REST framework provides a set of already mixed-in generic views
+(e.g. `generics.ListCreateAPIView` or `generics.RetrieveUpdateDestroyAPIView`)
+that we can use to trim down our `views.py` module even more.
