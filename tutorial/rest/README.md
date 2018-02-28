@@ -88,3 +88,54 @@ which slightly reduce the code, but we can go one step further.
 REST framework provides a set of already mixed-in generic views
 (e.g. `generics.ListCreateAPIView` or `generics.RetrieveUpdateDestroyAPIView`)
 that we can use to trim down our `views.py` module even more.
+
+
+
+## 4) Authentication & Permissions
+
+A field which is a reverse relationship on a model
+will not be included by default when using the `ModelSerializer` class,
+so we need to add an explicit field for it in the corresponding serializer.
+
+The `source` argument of a serializer's field controls which attribute is used
+to populate a field, and can point at any attribute on the serialized instance.
+It can also take the dotted notation (e.g. `'owner.username'`),
+in which case it will traverse the given attributes,
+in a similar way as it is used with Django's template language.
+
+The untyped `ReadOnlyField` class is always read-only,
+and will be used for serialized representations,
+but will not be used for updating model instances when they are deserialized.
+Another way to achieve this is to use `CharField(read_only=True)`.
+
+By overriding a `.perform_create()` method on a generic class-based view,
+we can modify how the instance save is managed,
+and handle any information that is implicit in the incoming request or requested URL.
+This way we can e.g. associate a user with a snippet instance:
+```python
+def perform_create(self, serializer):
+    serializer.save(owner=self.request.user)
+```
+In this case, the `create()` method of the serializer
+will be passed an additional `'owner'` field,
+along with the validated data from the request.
+
+REST framework includes a number of permission classes
+that we can use to restrict who can access a given view.
+An example is `IsAuthenticatedOrReadOnly` which will ensure
+that authenticated requests get read-write access,
+and unauthenticated requests get read-only access:
+```python
+from rest_framework import generics, permissions
+
+class SomeList(generics.ListAPIView):
+    # ...
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+```
+Of course you can also create custom permissions.
+
+We can add a login view for use with the browsable API,
+by editing the URLconf in the **project-level** `urls.py` file.
+Therefore we have to import `include` from `django.conf.urls` and
+add `url(r'^api-auth/', include('rest_framework.urls')),` at the end of the `urlpatterns` list.
+The `r'^api-auth/'` part of pattern can actually be whatever URL you want to use.

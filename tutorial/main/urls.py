@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^polls/', include('polls.urls')),
     url(r'^fortune/', include('fortune.urls')),
     url(r'^chat/', include('chat.urls')),
+    url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^admin/', admin.site.urls),
 ]
