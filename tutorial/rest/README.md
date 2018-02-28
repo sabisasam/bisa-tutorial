@@ -31,3 +31,44 @@ from .serializers import YourSerializer
 serializer = YourSerializer()
 print(repr(serializer))
 ```
+
+
+
+## 2) Requests and Responses
+
+REST framework introduces a `Request` object that extends the regular `HttpRequest`,
+and provides more flexible request parsing.
+The core functionality of the `Request` object is the `request.data` attribute
+which handles arbitrary data and works for 'POST', 'PUT' and 'PATCH' methods.
+This is similar to `request.POST` which only handles form data and only works for 'POST' method.
+
+REST framework also introduces a `Response` object,
+which is a type of `TemplateResponse` that takes unrendered content
+and uses content negotiation to determine the correct content type to return to the client.
+```python
+return Response(data) # Renders to content type as requested by the client.
+```
+
+REST framework provides two wrappers you can use to write API views:
+the `@api_view` decorator for working with function based views
+and the `APIView` class for working with class-based views.
+These wrappers provide a few bits of functionality
+such as making sure you receive `Request` instances in your view,
+and adding context to `Response` objects so that content negotiation can be performed.
+The wrappers also provide behaviour
+such as returning `405 Method Not Allowed` responses when appropriate,
+and handling any `ParseError` exception that occurs
+when accessing `request.data` with malformed input.
+
+Using those things we no longer need to explicitly tying our requests or responses
+to a given content type.
+`request.data` can handle incoming `json` requests, but it can also handle other formats.
+Similarly we're returning response objects with data,
+but allowing REST framework to render the response into the correct content type for us.
+
+To take advantage of the fact that our responses are no longer hardwired to a single content type
+we can add support for format suffixes to our API endpoints
+by adding a `format` keyword argument to the views
+and appending a set of `format_suffix_patterns` in addition to the URLs.
+Using format suffixes gives us URLs that explicitly refer to a given format,
+and means our API will be able to handle URLs such as <http://example.com/api/items/4.json>.
