@@ -218,3 +218,17 @@ which is similar to providing an urlpattern, and let it do the rest.
 Using the `DefaultRouter` class,
 we don't need to implement an `api_root` method in `views.py`
 because the `DefaultRouter` class automatically creates that view for us.
+
+
+
+## 7) Schemas & Client Libraries
+
+A schema is a machine-readable document that describes the available API endpoints,
+their URLs, and what operations they support.
+Schemas can be a useful tool for auto-generated documentation,
+and can also be used to drive dynamic client libraries that can interact with the API.
+
+In order to provide schema support REST framework uses [Core API](http://www.coreapi.org/).
+REST framework supports either explicitly defined schema views,
+or automatically generated schemas.
+By using viewsets and routers, wen can simply use the automatic schema generation.
