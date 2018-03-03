@@ -139,3 +139,41 @@ by editing the URLconf in the **project-level** `urls.py` file.
 Therefore we have to import `include` from `django.conf.urls` and
 add `url(r'^api-auth/', include('rest_framework.urls')),` at the end of the `urlpatterns` list.
 The `r'^api-auth/'` part of pattern can actually be whatever URL you want to use.
+
+
+
+## 5) Relationships & Hyperlinked APIs
+
+There are a number of different ways that we can choose
+to represent a relationship between entities:
+* Using primary keys.
+* Using hyperlinking between entities.
+* Using a unique identifying slug field on the related entity.
+* Using the default string representation of the related entity.
+* Nesting the related entity inside the parent representation.
+* Some other custom representation.
+REST framework supports all of these styles,
+and can apply them across forward or reverse relationships,
+or apply them across custom managers such as generic foreign keys.
+
+To use a hyperlinked style between entities,
+the serializers should extend `HyperlinkedModelSerializer`,
+which has the following differences from `ModelSerializer`:
+* It does not include the `id` field by default.
+* It includes a `url` field, using `HyperlinkedIdentityField`.
+* Relationships use `HyperlinkedRelatedField`, instead of `PrimaryKeyRelatedField`.
+We also need to make sure we name our URL patterns if we want to have a hyperlinked API.
+
+In case we defined an `app_name` in `urls.py`,
+we have to take it into account whenever we set a `view_name`.
+And because the `'url'` fields included by our serializers
+by default will refer to `'{model_name}-detail'`
+we especially have to specify those within our serializers, e.g. like this:
+```python
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    # ...
+
+    class Meta:
+        # ...
+        extra_kwargs = {'url': {'view_name': 'appname:user-detail'}}
+```
