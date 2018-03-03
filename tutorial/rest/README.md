@@ -177,3 +177,44 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         # ...
         extra_kwargs = {'url': {'view_name': 'appname:user-detail'}}
 ```
+
+
+
+## 6) ViewSets & Routers
+
+`ViewSet` classes are almost the same thing as `View` classes,
+except that they provide operations such as `read` or `update`,
+and not method handlers such as `get` or `put`.
+A `ViewSet` class is only bound to a set of method handlers at the last moment,
+when it is instantiated into a set of views, typically by using a `Router` class
+which handles the complexities of defining the URL conf for you.
+So the developer can concentrate on modeling the state and interactions of the API,
+and leave the URL construction to be handled automatically, based on common conventions.
+Using viewsets helps ensure that URL conventions will be consistent across your API
+and minimizes the amount of code you need to write,
+but it is less explicit than building your views individually.
+
+A single `ViewSet` class can replace multiple `View` classes,
+e.g. `UserList` and `UserDetail` which are `View` classes can be refactored
+into a single `UserViewSet` class.
+We still have to set the attributes exactly as we do when we are using regular views,
+but we don't need to provide the same information to multiple classes.
+The `ModelViewSet` class provides the complete set of default read and write operations
+while e.g. the `ReadOnlyModelViewSet` class only provides the default 'read-only' operations.
+We can use the `@detail_route` decorator to add any custom endpoints
+that don't fit into the standard `create`/`update`/`delete` style.
+Custom actions which use the `@detail_route` decorator
+will respond to `GET` requests by default.
+We can use the `methods` argument if we want an action that responds to `POST` requests.
+The URLs for custom actions by default depend on the method name itself.
+If you want to change the way url should be constructed,
+you can include `url_path` as a decorator keyword argument.
+
+By using `ViewSet` classes instead of `View` classes,
+the conventions of wiring up resources into views and urls
+can be handled automatically, [using a `Router` class](http://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/#using-routers).
+All we need to do is register the appropriate viewsets with a router,
+which is similar to providing an urlpattern, and let it do the rest.
+Using the `DefaultRouter` class,
+we don't need to implement an `api_root` method in `views.py`
+because the `DefaultRouter` class automatically creates that view for us.
