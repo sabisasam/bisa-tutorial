@@ -330,3 +330,12 @@ The rabbitmq folder contains the results of doing the RabbitMQ tutorial for Pyth
 
 The webhook got created through doing the steps described on [this page](https://simpleisbetterthancomplex.com/tutorial/2016/10/31/how-to-handle-github-webhooks-using-django.html).
 If the right secret token is used, the webhook reacts to GitHub's POST requests by e.g. sending "pong".
+
+
+
+## 21) REST Framework Tutorial
+
+The results of doing the
+[Django REST framework tutorial](http://www.django-rest-framework.org/#tutorial)
+are located in the `tutorial/rest/` folder
+and the notes which were taken during the tutorial are within the `tutorial/rest/README.md` file.
