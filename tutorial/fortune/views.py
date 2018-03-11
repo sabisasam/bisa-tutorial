@@ -2,8 +2,8 @@ import threading
 
 from django.shortcuts import render
 
-from .models import (Category, Fortune, get_available_pack_names, get_fortunes_path,
-                     PackAlreadyLoadedError, UnavailablePackError)
+from .models import Category, Fortune
+from . import models
 
 
 def index(request):
@@ -11,18 +11,17 @@ def index(request):
     Belongs to "Fortune Page - Overview" which lists links to
     different versions of the Fortune Page.
     """
-    categories = [pack.category.lower() for pack in Category.objects.all()]
-    return render(request, 'fortune/index.html', {'categories': categories})
+    return render(request, 'fortune/index.html')
 
 
 def load_fortune_packs():
-    packs = get_available_pack_names()
+    packs = models.get_available_pack_names()
     for pack in packs:
         try:
             Category.load(pack)
-        except PackAlreadyLoadedError:
+        except models.PackAlreadyLoadedError:
             pass
-        except UnavailablePackError:
+        except models.UnavailablePackError:
             pass
 
 
@@ -47,7 +46,7 @@ def fortune_websocket(request):
     """
     LoadFortunePacksThread().start()
     num_packs = 0
-    fortune_path = get_fortunes_path()
+    fortune_path = models.get_fortunes_path()
     for pack_path in fortune_path.iterdir():
         if not str(pack_path).endswith('.dat') and not str(
                 pack_path).endswith('.pdat'):

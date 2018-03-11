@@ -79,9 +79,10 @@ class Category(models.Model):
                 raise PackAlreadyLoadedError
             with codecs.open(pack_filename, 'r', encoding='utf-8', errors='ignore') as pack_file:
                 fortunes = pack_file.read()
-                for fortune in fortunes.split('\n%\n'):
-                    if fortune:  # No empty fortunes.
-                        Fortune.objects.create(text=fortune, category=pack)
+                for text in fortunes.split('\r\n%\r\n'):
+                    for fortune in text.split('\n%\n'):
+                        if fortune:  # No empty fortunes.
+                            Fortune.objects.create(text=fortune, category=pack)
 
     def unload(self):
         try:
