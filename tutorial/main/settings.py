@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'fortune.apps.FortuneConfig',
     'polls.apps.PollsConfig',
+    'rest.apps.RestConfig',
     'webhook.apps.WebhookConfig',
 
     'django.contrib.admin',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
     'channels',
     'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +91,12 @@ CHANNEL_LAYERS = {
             "hosts": [(SESSION_REDIS_HOST, 6379)],
         },
     },
+}
+
+# REST framework
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
 # Database

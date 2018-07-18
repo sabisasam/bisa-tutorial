@@ -18,8 +18,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^webhook/', include('webhook.urls')),
+    url(r'^rest/', include('rest.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^fortune/', include('fortune.urls')),
     url(r'^chat/', include('chat.urls')),
+    url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^admin/', admin.site.urls),
 ]
