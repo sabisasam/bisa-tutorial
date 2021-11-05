@@ -1,0 +1,15 @@
+{% if new_questions %}
+	{% for question in new_questions %}
+		<li id="{{ question.id }}">
+			{{ question.question_text }}
+		</li>
+	{% endfor %}
+{% elif messages %}
+	<ul class="messages">
+		{% for message in messages %}
+			<li class="{{ message.tags }}">{{ message }}</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p id="notification">No new question available.</p>
+{% endif %}

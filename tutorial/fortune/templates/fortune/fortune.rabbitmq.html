@@ -1,0 +1,27 @@
+{% extends "fortune/base.html" %}
+{% load fortunes static %}
+
+{% block title %}Fortune Page - RabbitMQ{% endblock %}
+
+{% block content %}
+<pre>This text will be replaced by a fortune when RabbitMQ sends one.</pre>
+{% endblock %}
+
+{% block script %}
+<script src="{% static '/fortune/js/jquery-3.2.1.min.js' %}"></script>
+<script>
+    var socket = new WebSocket("ws://" + window.location.host + "/fortune/rabbitmq/");
+    socket.onopen = function open() {
+        console.log("Created WebSocket connection.");
+    }
+    socket.onmessage = function message(event) {
+        var data = JSON.parse(event.data);
+        var fortune = data.fortune;
+        console.log("Received a fortune.");
+        $('pre').replaceWith('<pre>' + fortune + '</pre>');
+    };
+    if (socket.readyState == WebSocket.OPEN) {
+        socket.onopen();
+    }
+</script>
+{% endblock %}

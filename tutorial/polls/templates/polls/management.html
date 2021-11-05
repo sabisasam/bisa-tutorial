@@ -1,0 +1,12 @@
+{% extends "polls/base.html" %}
+{% load static %}
+
+{% block title %}Management Page - Overview{% endblock %}
+
+{% block content %}
+<h3>Which Management Page version do you want to display?</h3>
+<ul>
+	<li><a href="{% url 'polls:management-binding' %}">with Data Binding</a></li>
+	<li><a href="{% url 'polls:management-signals' %}">with Signals</a></li>
+</ul>
+{% endblock %}

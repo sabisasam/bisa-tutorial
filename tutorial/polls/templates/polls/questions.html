@@ -1,0 +1,68 @@
+{% extends "polls/base.html" %}
+{% load static %}
+
+{% block title %}Questions{% endblock %}
+
+{% block content %}
+{% if no_questions %}
+	<p>No unarchived question available.</p>
+{% else %}
+	<link rel="stylesheet" type="text/css" href="{% static 'polls/questions.css' %}" />
+	<link rel="stylesheet" href="{% static 'polls/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+
+	<table cellpadding="10">
+		<tr>
+			<td></td>
+			<td align="center">
+				<span title="Go to specific question."><div class="round-button"><div class="round-button-circle"><a href="/polls/questions/index/" class="round-button"><i class="fa fa-search fa-lg"></i></a></div></div></span>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<div class="pagination">
+					<span class="step-links">
+						{% if question.has_previous %}
+							<span title="Previous question."><div class="round-button"><div class="round-button-circle"><a href="?page={{ question.previous_page_number }}" class="round-button"><i class="fa fa-arrow-left fa-lg"></i></a></div></div></span>
+						{% endif %}
+					</span>
+				</div>
+			</td>
+			<td>
+				{% for q in question %}
+					{{ q.question_text|upper }}<br />
+					<br />
+					{% for choice in q.choice_set.all %}
+						<li>{{ choice.choice_text }}</li>
+					{% endfor %}
+					<br />
+				{% endfor %}
+
+				<div class="pagination">
+					<span class="step-links">
+						<span class="current">
+							Page {{ question.number }} of {{ question.paginator.num_pages }}.
+						</span>
+					</span>
+				</div>
+			</td>
+			<td align="center">
+				<div class="pagination">
+					<span class="step-links">
+						{% if question.has_next %}
+							<span title="Next question."><div class="round-button"><div class="round-button-circle"><a href="?page={{ question.next_page_number }}" class="round-button"><i class="fa fa-arrow-right fa-lg"></i></a></div></div></span>
+						{% endif %}
+					</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td align="center">
+				<span title="Archive question."><div class="round-button"><div class="round-button-circle"><a href="{% url 'polls:questions-archive' page %}" class="round-button"><i class="fa fa-archive fa-lg"></i></a></div></div></span>
+			</td>
+			<td></td>
+		</tr>
+	</table>
+{% endif %}
+{% endblock %}
